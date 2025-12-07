@@ -38,7 +38,7 @@ plt.switch_backend('Agg') # Backend không GUI
 # HÀM FEATURE ENGINEERING
 # =========================================================
 def hotel_feature_engineering(df):
-    logger.info("🛠️ Đang thực hiện Feature Engineering đặc thù...")
+    logger.info(" Đang thực hiện Feature Engineering đặc thù...")
     df = df.copy()
 
     # 1. Tổng số đêm
@@ -74,7 +74,7 @@ def main():
     TARGET_COL = 'is_canceled'
     
     if not os.path.exists(INPUT_PATH):
-        logger.error(f"❌ Không tìm thấy file: {INPUT_PATH}")
+        logger.error(f"Không tìm thấy file: {INPUT_PATH}")
         return
     
     temp_prep = DataPreprocessor(target_col=TARGET_COL)
@@ -84,7 +84,7 @@ def main():
     logger.info("Load dữ liệu và loại bỏ cột rác...")
     df = pd.read_csv(INPUT_PATH, dtype={'agent': 'object', 'company': 'object'})
     
-        
+    
     logger.info(" Loại bỏ dòng trùng lặp...")
     df = temp_prep.remove_duplicates(df)
     logger.info(f"   -> Shape sau khi loại bỏ trùng lặp: {df.shape}")
@@ -97,14 +97,14 @@ def main():
     df = temp_prep.fill_missing(df, num_strategy='median', cat_strategy='mode', mode='fit_transform')
     logger.info(f"   -> Shape sau khi xử lý sơ bộ: {df.shape}")
     
-    # Drop cột không cần thiết
+    # 3. Drop cột không cần thiết
     logger.info("3️⃣ Loại bỏ cột không cần thiết...")
     cols_drop = ['reservation_status', 'reservation_status_date', 'assigned_room_type', 'arrival_date_year', 'agent', 'company']
     existing = [c for c in cols_drop if c in df.columns]
     df.drop(columns=existing, inplace=True)
     logger.info(f"   -> Đã xóa {len(existing)} cột.")
     # ---------------------------------------------------------
-    # 3. SPLIT DATA
+    # 4. SPLIT DATA
     # ---------------------------------------------------------
     logger.info("3️⃣ Chia dữ liệu Train / Test ...")
     X = df.drop(columns=[TARGET_COL])
@@ -115,7 +115,7 @@ def main():
     )
 
     # ---------------------------------------------------------
-    # 4. PREPROCESSING (OUTLIER, ENCODE, SCALE)
+    # 5. PREPROCESSING (OUTLIER, ENCODE, SCALE)
     # ---------------------------------------------------------
     logger.info("4️⃣ Chạy Pipeline Tiền xử lý (Outlier, Encode, Scale)...")
     preprocessor = DataPreprocessor(target_col=TARGET_COL)
@@ -126,10 +126,11 @@ def main():
     logger.info("   -> Đang xử lý tập Test...")
     X_test_processed = preprocessor.transform(X_test_raw)
     
-    # 5. Lưu
+    # 6. Save datasets
     logger.info("   -> Lưu dữ liệu đã xử lý vào thư mục data/processed ...")
     preprocessor.save_processed_data(X_train_processed, filename="train_processed.csv", y=y_train_processed)
     preprocessor.save_processed_data(X_test_processed, filename="test_processed.csv", y=y_test_raw)
 if __name__ == "__main__":
     main()
+
 
