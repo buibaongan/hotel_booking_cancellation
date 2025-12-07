@@ -1,0 +1,1039 @@
+2025-12-07 16:41:41 - INFO - ModelTrainer initialized.
+2025-12-07 16:41:41 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 16:41:41 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 16:41:41 - INFO - Starting auto-selecting model....
+2025-12-07 16:41:41 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 16:43:00 - INFO - Optimization complete. Best Params: {'penalty': 'l1', 'C': 100}
+2025-12-07 16:43:00 - INFO - Best CV Score: 0.8038
+2025-12-07 16:43:00 - INFO - Report: 
+2025-12-07 16:43:00 - INFO - 
+{
+    "0": {
+        "precision": 0.804868011052972,
+        "recall": 0.9106632076099248,
+        "f1-score": 0.8545034642032333,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8044839132333673,
+        "recall": 0.6247597512719051,
+        "f1-score": 0.7033218785796106,
+        "support": 8845.0
+    },
+    "accuracy": 0.8047575173800151,
+    "macro avg": {
+        "precision": 0.8046759621431696,
+        "recall": 0.767711479440915,
+        "f1-score": 0.778912671391422,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8047257317492446,
+        "recall": 0.8047575173800151,
+        "f1-score": 0.7985020769496549,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:43:00 - ERROR - Failed to train LogisticRegression : ModelTrainer.save_metrics() got multiple values for argument 'filename'
+2025-12-07 16:43:00 - INFO - Tuning hyperparameters for DecisionTree...
+2025-12-07 16:43:02 - INFO - Optimization complete. Best Params: {'max_depth': 15, 'min_samples_leaf': 19, 'min_samples_split': 13}
+2025-12-07 16:43:02 - INFO - Best CV Score: 0.8408
+2025-12-07 16:43:02 - INFO - Report: 
+2025-12-07 16:43:02 - INFO - 
+{
+    "0": {
+        "precision": 0.8579124152354395,
+        "recall": 0.9004855983502961,
+        "f1-score": 0.8786836297546411,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8152858377577479,
+        "recall": 0.7465234595816845,
+        "f1-score": 0.7793909348441926,
+        "support": 8845.0
+    },
+    "accuracy": 0.8434542256470391,
+    "macro avg": {
+        "precision": 0.8365991264965937,
+        "recall": 0.8235045289659904,
+        "f1-score": 0.8290372822994169,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8421224798224994,
+        "recall": 0.8434542256470391,
+        "f1-score": 0.8419031671328588,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:43:02 - ERROR - Failed to train DecisionTree : ModelTrainer.save_metrics() got multiple values for argument 'filename'
+2025-12-07 16:43:02 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 16:46:24 - INFO - ModelTrainer initialized.
+2025-12-07 16:46:24 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 16:46:24 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 16:46:24 - INFO - Starting auto-selecting model....
+2025-12-07 16:46:24 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 16:47:39 - INFO - ModelTrainer initialized.
+2025-12-07 16:47:39 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 16:47:39 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 16:47:39 - INFO - Starting auto-selecting model....
+2025-12-07 16:47:39 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 16:48:59 - INFO - Optimization complete. Best Params: {'penalty': 'l1', 'C': 100}
+2025-12-07 16:48:59 - INFO - Best CV Score: 0.8038
+2025-12-07 16:48:59 - INFO - Report: 
+2025-12-07 16:48:59 - INFO - 
+{
+    "0": {
+        "precision": 0.804868011052972,
+        "recall": 0.9106632076099248,
+        "f1-score": 0.8545034642032333,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8044839132333673,
+        "recall": 0.6247597512719051,
+        "f1-score": 0.7033218785796106,
+        "support": 8845.0
+    },
+    "accuracy": 0.8047575173800151,
+    "macro avg": {
+        "precision": 0.8046759621431696,
+        "recall": 0.767711479440915,
+        "f1-score": 0.778912671391422,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8047257317492446,
+        "recall": 0.8047575173800151,
+        "f1-score": 0.7985020769496549,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:48:59 - ERROR - Failed to train LogisticRegression : ModelTrainer.save_metrics() got multiple values for argument 'filename'
+2025-12-07 16:48:59 - INFO - Tuning hyperparameters for DecisionTree...
+2025-12-07 16:49:02 - INFO - Optimization complete. Best Params: {'max_depth': 15, 'min_samples_leaf': 19, 'min_samples_split': 13}
+2025-12-07 16:49:02 - INFO - Best CV Score: 0.8408
+2025-12-07 16:49:02 - INFO - Report: 
+2025-12-07 16:49:02 - INFO - 
+{
+    "0": {
+        "precision": 0.8579124152354395,
+        "recall": 0.9004855983502961,
+        "f1-score": 0.8786836297546411,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8152858377577479,
+        "recall": 0.7465234595816845,
+        "f1-score": 0.7793909348441926,
+        "support": 8845.0
+    },
+    "accuracy": 0.8434542256470391,
+    "macro avg": {
+        "precision": 0.8365991264965937,
+        "recall": 0.8235045289659904,
+        "f1-score": 0.8290372822994169,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8421224798224994,
+        "recall": 0.8434542256470391,
+        "f1-score": 0.8419031671328588,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:49:02 - ERROR - Failed to train DecisionTree : ModelTrainer.save_metrics() got multiple values for argument 'filename'
+2025-12-07 16:49:02 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 16:51:33 - INFO - ModelTrainer initialized.
+2025-12-07 16:51:33 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 16:51:33 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 16:51:33 - INFO - Starting auto-selecting model....
+2025-12-07 16:51:33 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 16:52:51 - INFO - Optimization complete. Best Params: {'penalty': 'l1', 'C': 100}
+2025-12-07 16:52:51 - INFO - Best CV Score: 0.8038
+2025-12-07 16:52:51 - INFO - Report: 
+2025-12-07 16:52:51 - INFO - 
+{
+    "0": {
+        "precision": 0.804868011052972,
+        "recall": 0.9106632076099248,
+        "f1-score": 0.8545034642032333,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8044839132333673,
+        "recall": 0.6247597512719051,
+        "f1-score": 0.7033218785796106,
+        "support": 8845.0
+    },
+    "accuracy": 0.8047575173800151,
+    "macro avg": {
+        "precision": 0.8046759621431696,
+        "recall": 0.767711479440915,
+        "f1-score": 0.778912671391422,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8047257317492446,
+        "recall": 0.8047575173800151,
+        "f1-score": 0.7985020769496549,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:52:51 - ERROR - Failed to train LogisticRegression : ModelTrainer.save_metrics() got multiple values for argument 'filename'
+2025-12-07 16:52:51 - INFO - Tuning hyperparameters for DecisionTree...
+2025-12-07 16:52:53 - INFO - Optimization complete. Best Params: {'max_depth': 15, 'min_samples_leaf': 19, 'min_samples_split': 13}
+2025-12-07 16:52:53 - INFO - Best CV Score: 0.8408
+2025-12-07 16:52:53 - INFO - Report: 
+2025-12-07 16:52:53 - INFO - 
+{
+    "0": {
+        "precision": 0.8579124152354395,
+        "recall": 0.9004855983502961,
+        "f1-score": 0.8786836297546411,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8152858377577479,
+        "recall": 0.7465234595816845,
+        "f1-score": 0.7793909348441926,
+        "support": 8845.0
+    },
+    "accuracy": 0.8434542256470391,
+    "macro avg": {
+        "precision": 0.8365991264965937,
+        "recall": 0.8235045289659904,
+        "f1-score": 0.8290372822994169,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8421224798224994,
+        "recall": 0.8434542256470391,
+        "f1-score": 0.8419031671328588,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:52:53 - ERROR - Failed to train DecisionTree : ModelTrainer.save_metrics() got multiple values for argument 'filename'
+2025-12-07 16:52:53 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 16:54:47 - INFO - ModelTrainer initialized.
+2025-12-07 16:54:47 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 16:54:47 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 16:54:47 - INFO - Starting auto-selecting model....
+2025-12-07 16:54:47 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 16:56:03 - INFO - Optimization complete. Best Params: {'penalty': 'l1', 'C': 100}
+2025-12-07 16:56:03 - INFO - Best CV Score: 0.8038
+2025-12-07 16:56:03 - INFO - Report: 
+2025-12-07 16:56:03 - INFO - 
+{
+    "0": {
+        "precision": 0.804868011052972,
+        "recall": 0.9106632076099248,
+        "f1-score": 0.8545034642032333,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8044839132333673,
+        "recall": 0.6247597512719051,
+        "f1-score": 0.7033218785796106,
+        "support": 8845.0
+    },
+    "accuracy": 0.8047575173800151,
+    "macro avg": {
+        "precision": 0.8046759621431696,
+        "recall": 0.767711479440915,
+        "f1-score": 0.778912671391422,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8047257317492446,
+        "recall": 0.8047575173800151,
+        "f1-score": 0.7985020769496549,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:56:03 - INFO - Mectrics for LogisticRegression saved to avaluation_LogisticRegression.json
+2025-12-07 16:56:03 - INFO - Tuning hyperparameters for DecisionTree...
+2025-12-07 16:56:05 - INFO - Optimization complete. Best Params: {'max_depth': 15, 'min_samples_leaf': 19, 'min_samples_split': 13}
+2025-12-07 16:56:05 - INFO - Best CV Score: 0.8408
+2025-12-07 16:56:05 - INFO - Report: 
+2025-12-07 16:56:05 - INFO - 
+{
+    "0": {
+        "precision": 0.8579124152354395,
+        "recall": 0.9004855983502961,
+        "f1-score": 0.8786836297546411,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8152858377577479,
+        "recall": 0.7465234595816845,
+        "f1-score": 0.7793909348441926,
+        "support": 8845.0
+    },
+    "accuracy": 0.8434542256470391,
+    "macro avg": {
+        "precision": 0.8365991264965937,
+        "recall": 0.8235045289659904,
+        "f1-score": 0.8290372822994169,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8421224798224994,
+        "recall": 0.8434542256470391,
+        "f1-score": 0.8419031671328588,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:56:05 - INFO - Mectrics for DecisionTree saved to avaluation_DecisionTree.json
+2025-12-07 16:56:05 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 16:57:45 - INFO - Optimization complete. Best Params: {'n_estimators': 200, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_depth': None, 'bootstrap': False}
+2025-12-07 16:57:45 - INFO - Best CV Score: 0.8761
+2025-12-07 16:57:46 - INFO - Report: 
+2025-12-07 16:57:46 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:57:47 - INFO - Mectrics for RandomForest saved to avaluation_RandomForest.json
+2025-12-07 16:57:47 - INFO - Tuning hyperparameters for XGBoost...
+2025-12-07 16:57:58 - INFO - Optimization complete. Best Params: {'subsample': 0.8, 'n_estimators': 300, 'max_depth': 6, 'learning_rate': 0.2}
+2025-12-07 16:57:58 - INFO - Best CV Score: 0.8640
+2025-12-07 16:57:58 - INFO - Report: 
+2025-12-07 16:57:58 - INFO - 
+{
+    "0": {
+        "precision": 0.8789601430761369,
+        "recall": 0.9153861504689683,
+        "f1-score": 0.8968034149043631,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.845293116030163,
+        "recall": 0.7857546636517807,
+        "f1-score": 0.8144372180230854,
+        "support": 8845.0
+    },
+    "accuracy": 0.8673674512103191,
+    "macro avg": {
+        "precision": 0.86212662955315,
+        "recall": 0.8505704070603746,
+        "f1-score": 0.8556203164637243,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8664890460738067,
+        "recall": 0.8673674512103191,
+        "f1-score": 0.8662929445377118,
+        "support": 23878.0
+    }
+}
+2025-12-07 16:57:58 - INFO - Mectrics for XGBoost saved to avaluation_XGBoost.json
+2025-12-07 16:57:58 - INFO - 
+
+THE BEST MODEL IS : RandomForest with accuracy 0.8760580385694722
+
+2025-12-07 17:01:42 - INFO - ModelTrainer initialized.
+2025-12-07 17:01:42 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:01:42 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:01:42 - INFO - Starting auto-selecting model....
+2025-12-07 17:01:42 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 17:02:56 - INFO - Optimization complete. Best Params: {'penalty': 'l1', 'C': 100}
+2025-12-07 17:02:56 - INFO - Best CV Score: 0.8038
+2025-12-07 17:02:56 - INFO - Report: 
+2025-12-07 17:02:56 - INFO - 
+{
+    "0": {
+        "precision": 0.804868011052972,
+        "recall": 0.9106632076099248,
+        "f1-score": 0.8545034642032333,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8044839132333673,
+        "recall": 0.6247597512719051,
+        "f1-score": 0.7033218785796106,
+        "support": 8845.0
+    },
+    "accuracy": 0.8047575173800151,
+    "macro avg": {
+        "precision": 0.8046759621431696,
+        "recall": 0.767711479440915,
+        "f1-score": 0.778912671391422,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8047257317492446,
+        "recall": 0.8047575173800151,
+        "f1-score": 0.7985020769496549,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:02:56 - INFO - Mectrics for LogisticRegression saved to evaluation_LogisticRegression.json
+2025-12-07 17:02:56 - INFO - Tuning hyperparameters for DecisionTree...
+2025-12-07 17:02:58 - INFO - Optimization complete. Best Params: {'max_depth': 15, 'min_samples_leaf': 19, 'min_samples_split': 13}
+2025-12-07 17:02:58 - INFO - Best CV Score: 0.8408
+2025-12-07 17:02:59 - INFO - Report: 
+2025-12-07 17:02:59 - INFO - 
+{
+    "0": {
+        "precision": 0.8579124152354395,
+        "recall": 0.9004855983502961,
+        "f1-score": 0.8786836297546411,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8152858377577479,
+        "recall": 0.7465234595816845,
+        "f1-score": 0.7793909348441926,
+        "support": 8845.0
+    },
+    "accuracy": 0.8434542256470391,
+    "macro avg": {
+        "precision": 0.8365991264965937,
+        "recall": 0.8235045289659904,
+        "f1-score": 0.8290372822994169,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8421224798224994,
+        "recall": 0.8434542256470391,
+        "f1-score": 0.8419031671328588,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:02:59 - INFO - Mectrics for DecisionTree saved to evaluation_DecisionTree.json
+2025-12-07 17:02:59 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 17:04:39 - INFO - Optimization complete. Best Params: {'n_estimators': 200, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_depth': None, 'bootstrap': False}
+2025-12-07 17:04:39 - INFO - Best CV Score: 0.8761
+2025-12-07 17:04:40 - INFO - Report: 
+2025-12-07 17:04:40 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:04:41 - INFO - Mectrics for RandomForest saved to evaluation_RandomForest.json
+2025-12-07 17:04:41 - INFO - Tuning hyperparameters for XGBoost...
+2025-12-07 17:04:52 - INFO - Optimization complete. Best Params: {'subsample': 0.8, 'n_estimators': 300, 'max_depth': 6, 'learning_rate': 0.2}
+2025-12-07 17:04:52 - INFO - Best CV Score: 0.8640
+2025-12-07 17:04:52 - INFO - Report: 
+2025-12-07 17:04:52 - INFO - 
+{
+    "0": {
+        "precision": 0.8789601430761369,
+        "recall": 0.9153861504689683,
+        "f1-score": 0.8968034149043631,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.845293116030163,
+        "recall": 0.7857546636517807,
+        "f1-score": 0.8144372180230854,
+        "support": 8845.0
+    },
+    "accuracy": 0.8673674512103191,
+    "macro avg": {
+        "precision": 0.86212662955315,
+        "recall": 0.8505704070603746,
+        "f1-score": 0.8556203164637243,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8664890460738067,
+        "recall": 0.8673674512103191,
+        "f1-score": 0.8662929445377118,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:04:52 - INFO - Mectrics for XGBoost saved to evaluation_XGBoost.json
+2025-12-07 17:04:52 - INFO - 
+
+THE BEST MODEL IS : RandomForest with accuracy 0.8760580385694722
+
+2025-12-07 17:04:52 - INFO - Found 4 model evaluations. Generating plots....
+2025-12-07 17:04:54 - INFO - Report: 
+2025-12-07 17:04:54 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:04:54 - INFO - Model saved to model.pkl
+2025-12-07 17:12:30 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-07 17:12:30 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:12:30 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:12:30 - INFO - Starting auto-selecting model....
+2025-12-07 17:12:30 - INFO - Tuning hyperparameters for LogisticRegression...
+2025-12-07 17:14:17 - INFO - Optimization complete. Best Params: {'penalty': 'l1', 'C': 100}
+2025-12-07 17:14:17 - INFO - Best CV Score: 0.8038
+2025-12-07 17:14:17 - INFO - Report: 
+2025-12-07 17:14:17 - INFO - 
+{
+    "0": {
+        "precision": 0.804868011052972,
+        "recall": 0.9106632076099248,
+        "f1-score": 0.8545034642032333,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8044839132333673,
+        "recall": 0.6247597512719051,
+        "f1-score": 0.7033218785796106,
+        "support": 8845.0
+    },
+    "accuracy": 0.8047575173800151,
+    "macro avg": {
+        "precision": 0.8046759621431696,
+        "recall": 0.767711479440915,
+        "f1-score": 0.778912671391422,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8047257317492446,
+        "recall": 0.8047575173800151,
+        "f1-score": 0.7985020769496549,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:14:17 - INFO - Mectrics for LogisticRegression saved to evaluation_LogisticRegression.json
+2025-12-07 17:14:17 - INFO - Tuning hyperparameters for DecisionTree...
+2025-12-07 17:14:20 - INFO - Optimization complete. Best Params: {'max_depth': 15, 'min_samples_leaf': 19, 'min_samples_split': 13}
+2025-12-07 17:14:20 - INFO - Best CV Score: 0.8408
+2025-12-07 17:14:20 - INFO - Report: 
+2025-12-07 17:14:20 - INFO - 
+{
+    "0": {
+        "precision": 0.8579124152354395,
+        "recall": 0.9004855983502961,
+        "f1-score": 0.8786836297546411,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8152858377577479,
+        "recall": 0.7465234595816845,
+        "f1-score": 0.7793909348441926,
+        "support": 8845.0
+    },
+    "accuracy": 0.8434542256470391,
+    "macro avg": {
+        "precision": 0.8365991264965937,
+        "recall": 0.8235045289659904,
+        "f1-score": 0.8290372822994169,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8421224798224994,
+        "recall": 0.8434542256470391,
+        "f1-score": 0.8419031671328588,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:14:20 - INFO - Mectrics for DecisionTree saved to evaluation_DecisionTree.json
+2025-12-07 17:14:20 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 17:16:19 - INFO - Optimization complete. Best Params: {'n_estimators': 200, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_depth': None, 'bootstrap': False}
+2025-12-07 17:16:19 - INFO - Best CV Score: 0.8761
+2025-12-07 17:16:21 - INFO - Report: 
+2025-12-07 17:16:21 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:16:22 - INFO - Mectrics for RandomForest saved to evaluation_RandomForest.json
+2025-12-07 17:16:22 - INFO - Tuning hyperparameters for XGBoost...
+2025-12-07 17:16:34 - INFO - Optimization complete. Best Params: {'subsample': 0.8, 'n_estimators': 300, 'max_depth': 6, 'learning_rate': 0.2}
+2025-12-07 17:16:34 - INFO - Best CV Score: 0.8640
+2025-12-07 17:16:34 - INFO - Report: 
+2025-12-07 17:16:34 - INFO - 
+{
+    "0": {
+        "precision": 0.8789601430761369,
+        "recall": 0.9153861504689683,
+        "f1-score": 0.8968034149043631,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.845293116030163,
+        "recall": 0.7857546636517807,
+        "f1-score": 0.8144372180230854,
+        "support": 8845.0
+    },
+    "accuracy": 0.8673674512103191,
+    "macro avg": {
+        "precision": 0.86212662955315,
+        "recall": 0.8505704070603746,
+        "f1-score": 0.8556203164637243,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8664890460738067,
+        "recall": 0.8673674512103191,
+        "f1-score": 0.8662929445377118,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:16:34 - INFO - Mectrics for XGBoost saved to evaluation_XGBoost.json
+2025-12-07 17:16:34 - INFO - 
+
+THE BEST MODEL IS : RandomForest with accuracy 0.8760580385694722
+
+2025-12-07 17:16:35 - INFO - Found 4 model evaluations. Generating plots....
+2025-12-07 17:16:35 - INFO - Saved: comparison_barplot.png
+2025-12-07 17:16:35 - INFO - Saved: comparison_roc_curve.png
+2025-12-07 17:16:36 - INFO - Saved: comparison_confusion_matrices.png
+2025-12-07 17:16:37 - INFO - Report: 
+2025-12-07 17:16:37 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:16:37 - INFO - Model saved to model.pkl
+2025-12-07 17:31:31 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-07 17:31:31 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:31:31 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:31:31 - INFO - Tuning hyperparameters for CatBoost...
+2025-12-07 17:31:59 - INFO - Optimization complete. Best Params: {}
+2025-12-07 17:31:59 - INFO - Best CV Score: nan
+2025-12-07 17:31:59 - INFO - Report: 
+2025-12-07 17:31:59 - INFO - 
+{
+    "0": {
+        "precision": 0.8709352155281069,
+        "recall": 0.9193108494645114,
+        "f1-score": 0.8944694346461279,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8485642946317103,
+        "recall": 0.7684567552289429,
+        "f1-score": 0.8065262533372887,
+        "support": 8845.0
+    },
+    "accuracy": 0.8634307730965742,
+    "macro avg": {
+        "precision": 0.8597497550799087,
+        "recall": 0.8438838023467271,
+        "f1-score": 0.8504978439917084,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8626484747906655,
+        "recall": 0.8634307730965742,
+        "f1-score": 0.8618931117264241,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:32:00 - INFO - Model saved to model.pkl
+2025-12-07 17:36:40 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-07 17:36:40 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:36:41 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:36:41 - INFO - Tuning hyperparameters for CatBoost...
+2025-12-07 17:38:39 - INFO - Optimization complete. Best Params: {'learning_rate': 0.05, 'iterations': 500, 'depth': 8}
+2025-12-07 17:38:39 - INFO - Best CV Score: 0.8614
+2025-12-07 17:38:39 - INFO - Report: 
+2025-12-07 17:38:39 - INFO - 
+{
+    "0": {
+        "precision": 0.8690244362083045,
+        "recall": 0.9202421339719284,
+        "f1-score": 0.8939002326182476,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8493529337856515,
+        "recall": 0.7642736009044658,
+        "f1-score": 0.804570340395144,
+        "support": 8845.0
+    },
+    "accuracy": 0.8624675433453388,
+    "macro avg": {
+        "precision": 0.859188684996978,
+        "recall": 0.8422578674381971,
+        "f1-score": 0.8492352865066958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8617376266376384,
+        "recall": 0.8624675433453388,
+        "f1-score": 0.8608102377814375,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:38:39 - INFO - Model saved to model.pkl
+2025-12-07 17:39:40 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-07 17:39:40 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:39:40 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:39:40 - INFO - Tuning hyperparameters for LightGBM...
+2025-12-07 17:39:52 - INFO - Optimization complete. Best Params: {}
+2025-12-07 17:39:52 - INFO - Best CV Score: 0.8546
+2025-12-07 17:39:53 - INFO - Report: 
+2025-12-07 17:39:53 - INFO - 
+{
+    "0": {
+        "precision": 0.8617007992007992,
+        "recall": 0.9180469633473026,
+        "f1-score": 0.8889819317852427,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8432968710251845,
+        "recall": 0.749576031656303,
+        "f1-score": 0.7936792961034297,
+        "support": 8845.0
+    },
+    "accuracy": 0.8556411759778876,
+    "macro avg": {
+        "precision": 0.8524988351129918,
+        "recall": 0.8338114975018028,
+        "f1-score": 0.8413306139443362,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.854883530387946,
+        "recall": 0.8556411759778876,
+        "f1-score": 0.8536794854913472,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:39:53 - INFO - Model saved to model.pkl
+2025-12-07 17:43:47 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-07 17:43:47 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:43:47 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:43:47 - INFO - Tuning hyperparameters for LightGBM...
+2025-12-07 17:44:53 - INFO - Optimization complete. Best Params: {'num_leaves': 127, 'n_estimators': 500, 'learning_rate': 0.05}
+2025-12-07 17:44:53 - INFO - Best CV Score: 0.8714
+2025-12-07 17:44:53 - INFO - Report: 
+2025-12-07 17:44:53 - INFO - 
+{
+    "0": {
+        "precision": 0.8850552680339915,
+        "recall": 0.9214394997671789,
+        "f1-score": 0.9028809803154738,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8564482800534824,
+        "recall": 0.796608253250424,
+        "f1-score": 0.8254451733833177,
+        "support": 8845.0
+    },
+    "accuracy": 0.8751989278834074,
+    "macro avg": {
+        "precision": 0.8707517740437369,
+        "recall": 0.8590238765088014,
+        "f1-score": 0.8641630768493958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8744585342754018,
+        "recall": 0.8751989278834074,
+        "f1-score": 0.8741968479628931,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:44:53 - INFO - Model saved to model.pkl
+2025-12-07 17:45:17 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-07 17:45:17 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-07 17:45:17 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-07 17:45:17 - INFO - Starting auto-selecting model....
+2025-12-07 17:45:17 - INFO - Tuning hyperparameters for CatBoost...
+2025-12-07 17:47:11 - INFO - Optimization complete. Best Params: {'learning_rate': 0.05, 'iterations': 500, 'depth': 8}
+2025-12-07 17:47:11 - INFO - Best CV Score: 0.8614
+2025-12-07 17:47:11 - INFO - Report: 
+2025-12-07 17:47:11 - INFO - 
+{
+    "0": {
+        "precision": 0.8690244362083045,
+        "recall": 0.9202421339719284,
+        "f1-score": 0.8939002326182476,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8493529337856515,
+        "recall": 0.7642736009044658,
+        "f1-score": 0.804570340395144,
+        "support": 8845.0
+    },
+    "accuracy": 0.8624675433453388,
+    "macro avg": {
+        "precision": 0.859188684996978,
+        "recall": 0.8422578674381971,
+        "f1-score": 0.8492352865066958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8617376266376384,
+        "recall": 0.8624675433453388,
+        "f1-score": 0.8608102377814375,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:47:11 - INFO - Mectrics for CatBoost saved to evaluation_CatBoost.json
+2025-12-07 17:47:11 - INFO - Tuning hyperparameters for LightGBM...
+2025-12-07 17:48:06 - INFO - Optimization complete. Best Params: {'num_leaves': 127, 'n_estimators': 500, 'learning_rate': 0.05}
+2025-12-07 17:48:06 - INFO - Best CV Score: 0.8714
+2025-12-07 17:48:07 - INFO - Report: 
+2025-12-07 17:48:07 - INFO - 
+{
+    "0": {
+        "precision": 0.8850552680339915,
+        "recall": 0.9214394997671789,
+        "f1-score": 0.9028809803154738,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8564482800534824,
+        "recall": 0.796608253250424,
+        "f1-score": 0.8254451733833177,
+        "support": 8845.0
+    },
+    "accuracy": 0.8751989278834074,
+    "macro avg": {
+        "precision": 0.8707517740437369,
+        "recall": 0.8590238765088014,
+        "f1-score": 0.8641630768493958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8744585342754018,
+        "recall": 0.8751989278834074,
+        "f1-score": 0.8741968479628931,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:48:07 - INFO - Mectrics for LightGBM saved to evaluation_LightGBM.json
+2025-12-07 17:48:07 - INFO - Tuning hyperparameters for RandomForest...
+2025-12-07 17:49:50 - INFO - Optimization complete. Best Params: {'n_estimators': 200, 'min_samples_split': 5, 'min_samples_leaf': 1, 'max_depth': None, 'bootstrap': False}
+2025-12-07 17:49:50 - INFO - Best CV Score: 0.8761
+2025-12-07 17:49:51 - INFO - Report: 
+2025-12-07 17:49:51 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:49:53 - INFO - Mectrics for RandomForest saved to evaluation_RandomForest.json
+2025-12-07 17:49:53 - INFO - Tuning hyperparameters for XGBoost...
+2025-12-07 17:50:04 - INFO - Optimization complete. Best Params: {'subsample': 0.8, 'n_estimators': 300, 'max_depth': 6, 'learning_rate': 0.2}
+2025-12-07 17:50:04 - INFO - Best CV Score: 0.8640
+2025-12-07 17:50:05 - INFO - Report: 
+2025-12-07 17:50:05 - INFO - 
+{
+    "0": {
+        "precision": 0.8789601430761369,
+        "recall": 0.9153861504689683,
+        "f1-score": 0.8968034149043631,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.845293116030163,
+        "recall": 0.7857546636517807,
+        "f1-score": 0.8144372180230854,
+        "support": 8845.0
+    },
+    "accuracy": 0.8673674512103191,
+    "macro avg": {
+        "precision": 0.86212662955315,
+        "recall": 0.8505704070603746,
+        "f1-score": 0.8556203164637243,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8664890460738067,
+        "recall": 0.8673674512103191,
+        "f1-score": 0.8662929445377118,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:50:05 - INFO - Mectrics for XGBoost saved to evaluation_XGBoost.json
+2025-12-07 17:50:05 - INFO - 
+
+THE BEST MODEL IS : RandomForest with accuracy 0.8760580385694722
+
+2025-12-07 17:50:05 - INFO - Found 4 model evaluations. Generating plots....
+2025-12-07 17:50:05 - INFO - Saved: comparison_barplot.png
+2025-12-07 17:50:05 - INFO - Saved: comparison_roc_curve.png
+2025-12-07 17:50:06 - INFO - Saved: comparison_confusion_matrices.png
+2025-12-07 17:50:07 - INFO - Report: 
+2025-12-07 17:50:07 - INFO - 
+{
+    "0": {
+        "precision": 0.886704834605598,
+        "recall": 0.9272267677775561,
+        "f1-score": 0.9065131857054596,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8658985045354254,
+        "recall": 0.7986433013001696,
+        "f1-score": 0.8309121919661236,
+        "support": 8845.0
+    },
+    "accuracy": 0.8795962810955691,
+    "macro avg": {
+        "precision": 0.8763016695705117,
+        "recall": 0.8629350345388629,
+        "f1-score": 0.8687126888357917,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8789976568909369,
+        "recall": 0.8795962810955691,
+        "f1-score": 0.8785087134035738,
+        "support": 23878.0
+    }
+}
+2025-12-07 17:50:07 - INFO - Model saved to model.pkl
