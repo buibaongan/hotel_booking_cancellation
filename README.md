@@ -11,6 +11,7 @@ Dự án xây dựng mô hình Machine Learning nhằm dự đoán khách hàng 
 * Chủ động chính sách đặt phòng
 
 **Dataset**: `hotel_bookings.csv`
+* Link tải dữ liệu: https://www.kaggle.com/datasets/jessemostipak/hotel-booking-demand
 * **Input**: Thông tin khách hàng, loại phòng, thời gian đặt, tiền cọc...
 * **Output**: `0` (Không hủy) hoặc `1` (Hủy).
 
