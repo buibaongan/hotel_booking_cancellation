@@ -423,7 +423,7 @@ class EDAHotelBooking:
         </style>
         </head><body>
         <div class="container">
-            <h1>📊 BÁO CÁO PHÂN TÍCH DỮ LIỆU TOÀN DIỆN</h1>
+            <h1> BÁO CÁO PHÂN TÍCH DỮ LIỆU TOÀN DIỆN</h1>
             
             {self.generate_overview_section()}
             
@@ -454,7 +454,7 @@ class EDAHotelBooking:
         report_path = os.path.join(REPORT_DIR, "FULL_EDA_REPORT.html")
         with open(report_path, "w", encoding="utf-8") as f:
             f.write(html)
-        print(f"\n✅ XONG! Đã xuất báo cáo đầy đủ tại: {report_path}")
+        print(f"\n Đã xuất báo cáo đầy đủ tại: {report_path}")
 
     def generate_toc(self, plots):
         """Tạo Mục lục"""
@@ -472,6 +472,7 @@ if __name__ == "__main__":
             eda = EDAHotelBooking(df)
             eda.run_all()
         except Exception as e:
-            print(f"❌ Có lỗi xảy ra: {e}")
+            print(f" Có lỗi xảy ra: {e}")
     else:
-        print(f"❌ Lỗi: Không tìm thấy file dữ liệu tại {DATA_PATH}")
+
+        print(f"Lỗi: Không tìm thấy file dữ liệu tại {DATA_PATH}")
