@@ -1,0 +1,542 @@
+
+        <!DOCTYPE html>
+        <html><head><meta charset="utf-8"><title>Full EDA Report</title>
+        <style>
+            body { font-family: 'Segoe UI', sans-serif; background-color: #f4f4f9; color: #333; margin: 0; padding: 20px; }
+            .container { max-width: 1000px; margin: auto; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+            h2 { color: #3498db; margin-top: 40px; border-left: 5px solid #3498db; padding-left: 10px; }
+            .summary-box { background: #e8f4f8; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+            .chart-section { margin-bottom: 60px; page-break-inside: avoid; }
+            .comment-box { background-color: #fff3cd; border: 1px solid #ffeeba; border-left: 5px solid #ffc107; padding: 15px; margin-top: 15px; border-radius: 4px; }
+            img { width: 100%; border-radius: 5px; border: 1px solid #ddd; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+            
+            /* CSS cho bảng */
+            table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.9em; }
+            th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+            
+            .table th { background-color: #f8f9fa; }
+            .table tr:nth-child(even) { background-color: #f8f9fa; }
+            .table tr:hover { background-color: #e9ecef; }
+            
+            hr { border: 0; border-top: 1px solid #eee; margin: 40px 0; }
+            ul { line-height: 1.6; }
+        </style>
+        </head><body>
+        <div class="container">
+            <h1>📊 BÁO CÁO PHÂN TÍCH DỮ LIỆU TOÀN DIỆN</h1>
+            
+            
+        <h2>1.  TỔNG QUAN DỮ LIỆU</h2>
+        <div class="comment-box" style="background-color: #e8f4f8; border-color: #3498db; margin-top: 15px;">
+            <h3> NHẬN XÉT:</h3>
+            <ul>
+                <li><b>Số lượng bản ghi:</b> Bộ dữ liệu bao gồm 119,390 bản ghi.</li>
+                <li><b>Số lượng cột:</b> Bộ dữ liệu có 36 cột, tương ứng với nhiều thuộc tính khác nhau liên quan đến đặt phòng khách sạn.</li>
+                <li><b>Kiểu dữ liệu:</b>
+                    <ul>
+                        <li>Phần lớn các cột (17 cột) thuộc kiểu object (thường là chuỗi hoặc dữ liệu phân loại).</li>
+                        <li>15 cột thuộc kiểu int64, biểu diễn các giá trị số nguyên.</li>
+                        <li>3 cột thuộc kiểu float64, thường biểu diễn các giá trị thập phân.</li>
+                    </ul>
+                </li>
+                <li><b>Giá trị thiếu:</b>
+                    <ul>
+                        <li>Cột children có 4 giá trị bị thiếu.</li>
+                        <li>Cột country có 0 giá trị bị thiếu.</li>
+                        <li>Cột agent có 0 giá trị bị thiếu.</li>
+                        <li>Cột company có số lượng giá trị thiếu rất lớn, lên đến 0.</li>
+                    </ul>
+                    <p><i>Những giá trị thiếu này có thể cần được xử lý tùy theo mục tiêu phân tích hoặc mô hình cần xây dựng.</i></p>
+                </li>
+            </ul>
+            <p><b>Phân loại biến:</b> Dựa trên kiểu dữ liệu và phần mô tả đặc trưng đã trình bày trước đó, xác định được rằng có 20 cột là các biến phân loại theo của chúng. Những đặc trưng này cần có kiểu dữ liệu dạng chuỗi (object) để đảm bảo quá trình phân tích và diễn giải trong các bước tiếp theo được thực hiện chính xác.</p>
+        </div>
+        
+            
+            
+        <h2>2. THỐNG KÊ MÔ TẢ BIẾN SỐ</h2>
+        <p>Chi tiết các chỉ số thống kê (Mean, Std, Min, Max, Quartiles):</p>
+        <div style="overflow-x:auto;">
+            
+        <table class="table numeric-table" style="background-color: #ffffff; border: 2px solid #3498db;">
+            <thead>
+                <tr style="background-color: #e3f2fd; color: #1565c0; font-weight: bold;">
+                    <th style="border: 1px solid #3498db; padding: 10px;"></th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">count</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">mean</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">std</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">min</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">25%</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">50%</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">75%</th>
+                    <th style="border: 1px solid #3498db; padding: 10px;">max</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">lead_time</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">104.01</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">106.86</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">18.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">69.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">160.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">737.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">arrival_date_week_number</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">27.17</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">13.61</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">16.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">28.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">38.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">53.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">arrival_date_day_of_month</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">15.80</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">8.78</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">8.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">16.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">23.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">31.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">stays_in_weekend_nights</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.93</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">19.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">stays_in_week_nights</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.50</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.91</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">3.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">50.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">adults</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.86</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.58</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">55.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">children</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,386.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.10</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.40</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">10.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">babies</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.01</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.10</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">10.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">previous_cancellations</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.09</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.84</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">26.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">previous_bookings_not_canceled</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.14</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.50</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">72.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">booking_changes</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.22</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.65</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">21.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">days_in_waiting_list</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2.32</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">17.59</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">391.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">adr</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">101.83</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">50.54</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">-6.38</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">69.29</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">94.58</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">126.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">5400.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">required_car_parking_spaces</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.06</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.25</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">8.00</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #f0f8ff; border: 1px solid #3498db; padding: 8px;">total_of_special_requests</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.57</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.79</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">1.00</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">5.00</td>
+                </tr>
+            
+            </tbody>
+        </table>
+        
+        </div>
+        
+        <div class="comment-box" style="background-color: #e8f4f8; border-color: #3498db; margin-top: 20px;">
+            <h3>📈 NHẬN XÉT THỐNG KÊ MÔ TẢ BIẾN SỐ</h3>
+            <ul>
+                <li><b>lead_time:</b> Trung bình 104 ngày, dao động 0–737.</li>
+                <li><b>arrival_date_week_number:</b> Trung bình tuần 27.17, từ 1–53.</li>
+                <li><b>arrival_date_day_of_month:</b> Trung bình ngày 15.80, từ 1–31.</li>
+                <li><b>stays_in_weekend_nights:</b> Trung bình 0.93 đêm cuối tuần, tối đa 19.</li>
+                <li><b>stays_in_week_nights:</b> Trung bình 2.5 đêm trong tuần, từ 0–50.</li>
+                <li><b>adults:</b> Trung bình 1.86 người lớn, từ 0–55.</li>
+                <li><b>children:</b> Trung bình 0.1 trẻ em, tối đa 10.</li>
+                <li><b>babies:</b> Trung bình 0.008 trẻ sơ sinh, tối đa 10.</li>
+                <li><b>previous_cancellations:</b> Trung bình 0.09 lần hủy, tối đa 26.</li>
+                <li><b>previous_bookings_not_canceled:</b> Trung bình 0.14, tối đa 72.</li>
+                <li><b>booking_changes:</b> Trung bình 0.22 lần thay đổi, tối đa 21.</li>
+                <li><b>days_in_waiting_list:</b> Trung bình 2.32 ngày, tối đa 391.</li>
+                <li><b>adr:</b> Trung bình 101.83, dao động -6.38–5400.</li>
+                <li><b>required_car_parking_spaces:</b> Trung bình 0.06, tối đa 8.</li>
+                <li><b>total_of_special_requests:</b> Trung bình 0.57, tối đa 5.</li>
+            </ul>
+            <h4 style="color: #e74c3c;">⚠️ NOISY DATA FEATURE</h4>
+            <ul>
+                <li><b>adr:</b> Giá âm (-6.38) không hợp lý → có thể lỗi dữ liệu.</li>
+                <li><b>adults:</b> Giá trị tối thiểu 0 → có thể lỗi nếu không có người lớn.</li>
+                <li><b>children, babies:</b> Giá trị tối đa 10 → có thể ngoại lệ hoặc lỗi.</li>
+            </ul>
+        </div>
+        
+        
+            
+            
+        <h2>3. THỐNG KÊ MÔ TẢ BIẾN PHÂN LOẠI</h2>
+        <div style="overflow-x:auto;">
+            
+        <table class="table cat-table" style="background-color: #ffffff; border: 2px solid #2ecc71;">
+            <thead>
+                <tr style="background-color: #d4efdf; color: #27ae60; font-weight: bold;">
+                    <th style="border: 1px solid #2ecc71; padding: 10px;"></th>
+                    <th style="border: 1px solid #2ecc71; padding: 10px;">count</th>
+                    <th style="border: 1px solid #2ecc71; padding: 10px;">unique</th>
+                    <th style="border: 1px solid #2ecc71; padding: 10px;">top</th>
+                    <th style="border: 1px solid #2ecc71; padding: 10px;">freq</th>
+                </tr>
+            </thead>
+            <tbody>
+        
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">hotel</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">City Hotel</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">79,330</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">is_canceled</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">75,166</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">arrival_date_year</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2016</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">56,707</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">arrival_date_month</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">August</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">13,877</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">meal</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">5</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">BB</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">92,310</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">country</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">178</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">PRT</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">48,590</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">market_segment</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">8</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Online TA</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">56,477</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">distribution_channel</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">5</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">TA/TO</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">97,870</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">is_repeated_guest</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">2</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">0</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">115,580</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">reserved_room_type</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">10</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">A</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">85,994</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">assigned_room_type</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">12</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">A</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">74,053</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">deposit_type</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">No Deposit</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">104,641</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">agent</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">334</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">9.0</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">31,961</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">company</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">353</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">nan</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">112,593</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">customer_type</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">4</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Transient</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">89,613</td>
+                </tr>
+            
+                <tr style="border: 1px solid #ddd;">
+                    <td style="font-weight: bold; background-color: #eafaf1; border: 1px solid #2ecc71; padding: 8px;">reservation_status</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">119,390</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">3</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Check-Out</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">75,166</td>
+                </tr>
+            
+            </tbody>
+        </table>
+        
+        </div>
+        
+        <div class="comment-box" style="background-color: #e8f4f8; border-color: #3498db; margin-top: 20px;">
+            <h3>📊 NHẬN XÉT THỐNG KÊ MÔ TẢ BIẾN PHÂN LOẠI</h3>
+            <ul>
+                <li><b>hotel:</b> Có hai loại khách sạn, trong đó "City Hotel" là loại xuất hiện nhiều nhất với 79,330 lần trên tổng số 119,390 bản ghi.</li>
+                <li><b>is_canceled:</b> Có hai giá trị (0 = không hủy, 1 = hủy). Giá trị phổ biến nhất là "0" (không hủy), xuất hiện 75,166 lần.</li>
+                <li><b>arrival_date_year:</b> Có ba năm khác nhau trong dữ liệu, trong đó năm 2016 là phổ biến nhất với 56,707 lượt đến.</li>
+                <li><b>arrival_date_month:</b> Có 12 tháng khác nhau. Tháng có lượt đến nhiều nhất là tháng 8 với 13,877 lượt.</li>
+                <li><b>meal:</b> Có 5 loại bữa ăn được đặt. Loại phổ biến nhất là "BB", xuất hiện 92,310 lần.</li>
+                <li><b>country:</b> Có 178 quốc gia xuất hiện trong dữ liệu. Quốc gia phổ biến nhất là "PRT" (Bồ Đào Nha), với 48,590 lượt.</li>
+                <li><b>market_segment:</b> Có 8 phân khúc thị trường, trong đó phổ biến nhất là "Online TA" với 56,477 lượt.</li>
+                <li><b>distribution_channel:</b> Có 5 kênh phân phối đặt phòng, với "TA/TO" là phổ biến nhất, xuất hiện 97,870 lần.</li>
+                <li><b>is_repeated_guest:</b> Có hai giá trị (0 = khách mới, 1 = khách quay lại). Giá trị phổ biến nhất là "0".</li>
+                <li><b>reserved_room_type và assigned_room_type:</b> Có nhiều loại phòng khác nhau, một số loại xuất hiện thường xuyên hơn các loại khác.</li>
+                <li><b>deposit_type:</b> Có 3 loại đặt cọc, trong đó "No Deposit" là phổ biến nhất với 104,641 lượt.</li>
+                <li><b>agent:</b> Có 334 đại lý, trong đó mã '9.0' là phổ biến nhất với 31,961 lượt.</li>
+                <li><b>company:</b> Có 353 công ty, nhưng giá trị 'nan' (thiếu dữ liệu) chiếm nhiều nhất với 112,593 lượt, cho thấy biến này có tỷ lệ thiếu rất cao.</li>
+                <li><b>customer_type:</b> Có 4 loại khách hàng, phổ biến nhất là "Transient" với 89,613 lượt.</li>
+                <li><b>reservation_status:</b> Có 3 trạng thái đặt phòng, trong đó "Check-Out" là phổ biến nhất với 75,166 lượt.</li>
+                <li><b>reservation_status_date:</b> Có 926 ngày khác nhau, trong đó ngày phổ biến nhất là '2015-10-21' với 1,461 lượt.</li>
+                <li><b>name:</b> Có 81,503 tên khác nhau, với 'Michael Johnson' là tên xuất hiện nhiều nhất (48 lần).</li>
+                <li><b>email:</b> Có 115,889 email khác nhau, với 'Michael.C@gmail.com' là phổ biến nhất (6 lần).</li>
+                <li><b>phone-number:</b> Có 119,390 số điện thoại khác nhau, nghĩa là gần như mỗi khách đều có số riêng.</li>
+                <li><b>credit_card:</b> Có 9,000 số thẻ tín dụng, trong đó '***4923' là phổ biến nhất (28 lần).</li>
+            </ul>
+        </div>
+        
+        
+            
+            <hr>
+            
+            <h2>4. BIỂU ĐỒ TRỰC QUAN HÓA & INSIGHTS</h2>
+            <h3>MỤC LỤC BIỂU ĐỒ</h3><ul><li><a href='#chart_1' style='text-decoration:none; color:#2980b9;'>1. Biểu đồ Hộp (Boxplot) phát hiện Outlier</a></li><li><a href='#chart_2' style='text-decoration:none; color:#2980b9;'>2. Phân phối các biến số (Histogram)</a></li><li><a href='#chart_3' style='text-decoration:none; color:#2980b9;'>3. Thống kê các nhóm phân loại</a></li><li><a href='#chart_4' style='text-decoration:none; color:#2980b9;'>4. Nguồn khách theo Quốc gia</a></li><li><a href='#chart_5' style='text-decoration:none; color:#2980b9;'>5. Rủi ro hủy theo từng phân khúc</a></li><li><a href='#chart_6' style='text-decoration:none; color:#2980b9;'>6. Ma trận tương quan (Correlation Matrix)</a></li><li><a href='#chart_7' style='text-decoration:none; color:#2980b9;'>7. Phân phối Lead Time: Hủy vs Không hủy</a></li><li><a href='#chart_8' style='text-decoration:none; color:#2980b9;'>8. Tác động của Special Requests</a></li></ul>
+            <br>
+        
+            <div class="chart-section" id="chart_1">
+                <h3>1. Biểu đồ Hộp (Boxplot) phát hiện Outlier</h3>
+                <img src="images/01_boxplot_outliers.png" alt="Biểu đồ Hộp (Boxplot) phát hiện Outlier">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> 
+        <b>Phân tích Outlier và Phân phối:</b><br>
+        - <b>Lead Time:</b> Trung vị của nhóm Hủy (113 ngày) cao hơn đáng kể so với nhóm Không hủy (45 ngày). Hộp IQR của nhóm hủy cũng dài hơn, cho thấy sự biến động lớn.<br>
+        - <b>ADR:</b> Giá phòng có nhiều điểm ngoại lai (Outliers) ở phía trên. Điều này gợi ý nên sử dụng RobustScaler thay vì StandardScaler khi tiền xử lý.
+        
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_2">
+                <h3>2. Phân phối các biến số (Histogram)</h3>
+                <img src="images/02_histogram_vars.png" alt="Phân phối các biến số (Histogram)">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Thời gian đặt trước trung bình là <b>104 ngày</b>, nhưng phân phối bị lệch phải (Right-skewed). Giá phòng trung bình (ADR) khoảng <b>101.8 USD</b>.
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_3">
+                <h3>3. Thống kê các nhóm phân loại</h3>
+                <img src="images/03_countplot_cats.png" alt="Thống kê các nhóm phân loại">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Dữ liệu bị mất cân bằng ở Customer Type (Transient chiếm đa số). Loại hình <b>City Hotel</b> và phân khúc <b>Online TA</b> là phổ biến nhất.
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_4">
+                <h3>4. Nguồn khách theo Quốc gia</h3>
+                <img src="images/04_top_10_countries.png" alt="Nguồn khách theo Quốc gia">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Khách hàng đến từ <b>PRT</b> chiếm áp đảo (48,590 lượt). Cần lưu ý feature này có thể gây Overfitting nếu mô hình học quá kỹ vào quốc gia này.
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_5">
+                <h3>5. Rủi ro hủy theo từng phân khúc</h3>
+                <img src="images/05_segment_cancel.png" alt="Rủi ro hủy theo từng phân khúc">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Phân khúc <b>Undefined</b> có tỷ lệ hủy cao nhất (100.0%). Nhóm khách này rủi ro cao, cần features riêng để bắt tín hiệu hủy.
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_6">
+                <h3>6. Ma trận tương quan (Correlation Matrix)</h3>
+                <img src="images/06_heatmap_corr.png" alt="Ma trận tương quan (Correlation Matrix)">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Biến <b>lead_time</b> và <b>previous_cancellations</b> có tương quan dương với việc hủy. Ngược lại, <b>total_of_special_requests</b> và <b>parking_spaces</b> có tương quan âm (càng nhiều request càng ít hủy).
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_7">
+                <h3>7. Phân phối Lead Time: Hủy vs Không hủy</h3>
+                <img src="images/07_lead_time_kde.png" alt="Phân phối Lead Time: Hủy vs Không hủy">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Đường màu cam (Hủy) nhô cao và kéo dài về phía bên phải hơn đường màu xanh. Khách đặt phòng từ rất sớm (Lead Time > 100) có xác suất hủy cao hơn hẳn.
+                </div>
+            </div>
+            
+            <div class="chart-section" id="chart_8">
+                <h3>8. Tác động của Special Requests</h3>
+                <img src="images/08_special_requests.png" alt="Tác động của Special Requests">
+                <div class="comment-box">
+                    <strong>💡 Insight:</strong> Rõ ràng: Khách hàng không có yêu cầu đặc biệt nào (0 requests) có tỷ lệ hủy cực cao. Khách có yêu cầu thường là khách 'thật' và cam kết ở lại.
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:50px; color:#888;">Report generated by Python Auto-EDA v2.0</div></div></body></html>
