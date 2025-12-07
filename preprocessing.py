@@ -47,7 +47,7 @@ class MyMinMaxScaler:
         return self.transform(df, columns)
 
 # =========================================================
-# 2. DATA PREPROCESSOR CLASS (Phiên bản "Sạch sẽ tuyệt đối")
+# 2. DATA PREPROCESSOR CLASS
 # =========================================================
 class DataPreprocessor:
     def __init__(self, target_col=None):
@@ -67,7 +67,7 @@ class DataPreprocessor:
         self.scaler = None
         self.scale_method = 'standard'
 
-    # --- Helpers ---
+    # ------
     def _detect_column_types(self, df):
         self.numeric_cols = df.select_dtypes(include=["int64", "float64"]).columns.tolist()
         self.categorical_cols = df.select_dtypes(include=["object", "category"]).columns.tolist()
@@ -264,7 +264,7 @@ class DataPreprocessor:
         print(f"   -> IQR: Loại {len(df) - mask.sum()} dòng ngoại lai.")
         return df[mask].reset_index(drop=True)
 
-    # --- HÀM VỆ SINH CUỐI CÙNG ---
+    # ------
     def _final_cleanup(self, df):
         """Đảm bảo không còn NaN hay Inf trước khi đưa vào model"""
         if df is None: return None
@@ -313,7 +313,7 @@ class DataPreprocessor:
         
         self.df = self.scale_features(self.df, method=self.scale_method, mode='fit_transform')
 
-        # 5. VỆ SINH CUỐI CÙNG & TÁCH
+        # 5. CLEAN LẦN CUỐI & TÁCH
         self.df = self._final_cleanup(self.df)
         
         if y is not None and self.target_col in self.df.columns:
@@ -380,3 +380,4 @@ class DataPreprocessor:
     def save_preprocessor(self, path):
         joblib.dump(self, path)
         print(f"Đã lưu Preprocessor tại {path}")
+
