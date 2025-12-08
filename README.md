@@ -34,8 +34,8 @@ pip install -r requirements.txt
 ```ini
 [DATA]
 # Đường dẫn đến file dữ liệu
-trainpath = data/processed/train.csv
-testpath = data/processed/test.csv
+trainpath = data/processed/train_processed.csv
+testpath = data/processed/test_processed.csv
 ...
 # Phần còn lại giữ nguyên
 ```
