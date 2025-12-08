@@ -99,24 +99,26 @@ MY_PROJECT/
 │       ├── train_processed.csv
 │       └── test_processed.csv
 │
-├── models/                     # Chứa Model và Kết quả đánh giá
-│   ├── model.pkl                       # File model chính
+├── models/                     # Chứa Model và Kết quả đánh giá 
+│   ├── model.pkl                       # File model chính đã train
 │   │
-│   ├── comparison_barplot.png          # (Các file từ ảnh danh sách file của bạn)
+│   ├── comparison_barplot.png          # Biểu đồ so sánh
 │   ├── comparison_confusion_matrices.png
 │   ├── comparison_roc_curve.png
-│   ├── evaluation_CatBoost.json
+│   │
+│   ├── evaluation_CatBoost.json        # Kết quả đánh giá chi tiết (JSON)
 │   ├── evaluation_LightGBM.json
 │   ├── evaluation_RandomForest.json
 │   ├── evaluation_XGBoost.json
-│   ├── feature_importance_CatBoost.csv
+│   │
+│   ├── feature_importance_CatBoost.csv # Mức độ quan trọng của biến (CSV)
 │   ├── feature_importance_LightGBM.csv
 │   ├── feature_importance_RandomForest.csv
 │   ├── feature_importance_XGBoost.csv
-│   └── model_comparison_summary.csv
+│   └── model_comparison_summary.csv    # Bảng tổng hợp so sánh
 │
-├── reports/                    # Báo cáo (Cập nhật theo ảnh mới nhất)
-│   ├── images/                 # Thư mục chứa ảnh bổ trợ (nếu có)
+├── reports/                    # Báo cáo 
+│   ├── images/                 # Thư mục chứa ảnh bổ trợ 
 │   ├── FULL_EDA_REPORT.html    # Báo cáo HTML nằm ngay ngoài
 │   └── preprocessor.joblib     # File xử lý dữ liệu
 │
