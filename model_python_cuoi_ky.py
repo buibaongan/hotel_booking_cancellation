@@ -109,11 +109,9 @@ class ModelTrainer:
 
     def load_data(self):
         """
-       Tải dữ liệu từ đường dẫn cấu hình trong file config.
-
+        Tải dữ liệu từ đường dẫn cấu hình trong file config.
         Raises:
-            ValueError
-                Nếu không tìm thấy trainpath hoặc testpath.
+            ValueError Nếu không tìm thấy trainpath hoặc testpath.
         """
         if self.trainpath and self.testpath:
             logging.info(f"Loading data from {self.trainpath}...")
@@ -133,7 +131,6 @@ class ModelTrainer:
             y: Nhãn mục tiêu.
             test_size: Tỉ lệ dữ liệu dành cho kiểm tra (mặc định 0.3).
             random_state: Giá trị cố định để tái lập (mặc định 42).
-
         Returns:
             X_train, X_test, y_train, y_test: Các tập dữ liệu sau khi chia.
         """
@@ -142,6 +139,31 @@ class ModelTrainer:
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
         return X_train, X_test, y_train, y_test
 
+    # Trong file src/model.py -> class ModelTrainer
+    def split_data(self, X, y, test_size=0.3, random_state=42, stratify=None):
+        """
+        Chia dữ liệu thành tập huấn luyện và tập kiểm tra.
+
+        Args:
+            X: Dữ liệu đặc trưng.
+            y: Nhãn mục tiêu.
+            test_size: Tỉ lệ dữ liệu dành cho kiểm tra (mặc định 0.3).
+            random_state: Giá trị cố định để tái lập (mặc định 42).
+            stratify: Mảng dùng để phân tầng khi chia (mặc định None).
+        Returns:
+            X_train, X_test, y_train, y_test: Các tập dữ liệu sau khi chia.
+        """
+        
+        # Thêm tham số stratify vào hàm train_test_split
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, 
+            test_size=test_size, 
+            random_state=random_state, 
+            stratify=stratify
+        )
+        return X_train, X_test, y_train, y_test
+    
+    
     @staticmethod
     def evaluate(y_pred, y_test):
         """
@@ -149,7 +171,6 @@ class ModelTrainer:
 
         :param y_pred: Nhãn dự đoán từ mô hình.
         :param y_test: Nhãn thực tế.
-
         Returns
             dict báo cáo đánh giá (precision, recall, f1-score, accuracy).
         """
@@ -170,10 +191,8 @@ class ModelTrainer:
                 Mô hình tốt nhất sau tinh chỉnh.
             best_score : float
                 Điểm cross-validation cao nhất.
-
         Raises
-            ValueError
-                Nếu dữ liệu chưa được load hoặc tên model không hợp lệ.
+            ValueError Nếu dữ liệu chưa được load hoặc tên model không hợp lệ.
         """
         if self.train is None:
             logging.error("Data not loaded!!!")
@@ -533,7 +552,6 @@ class ModelTrainer:
         Parameters
         filename : str
             Tên file để lưu mô hình.
-
         Raises
             ValueError
                 Nếu mô hình chưa được huấn luyện.
@@ -559,35 +577,3 @@ class ModelTrainer:
             logging.info(f"Model loaded from {filename}")
         except FileNotFoundError:
             logging.info(f"File {filename} not found.")
-
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train a CatBoost Model")
-    
-    # Add arguments
-    parser.add_argument('--config', type=str, default='config.ini', help='Path to configuration file')
-    parser.add_argument('--tune', action='store_true', help='Flag to run hyperparameter tuning')
-    parser.add_argument('--model', type=str, default='CatBoost', 
-                        choices=['CatBoost', 'LightGBM', 'XGBoost' , 'RandomForest', 'Auto'], 
-                        help='Which algorithm to use')
-
-    # Parse arguments
-    args = parser.parse_args()
-
-    # workflow
-    trainer = ModelTrainer(config_path=args.config)
-    trainer.load_data()
-    
-    if args.tune:
-        if args.model == 'Auto':
-            trainer.auto_select_model()
-            trainer.plot_evaluation_results()
-        else:
-            print(f"Starting hyperparameter tuning for {args.model}...")
-            trainer.optimize_params(model_name=args.model)
-        trainer.train_predict()
-        trainer.get_feature_importance(args.model)
-        trainer.save_model()
-    else:
-        print("No action selected. Use --tune to train the model.") 
