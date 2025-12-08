@@ -1,7 +1,6 @@
 # Load libraries
 import pandas as pd
 import logging
-from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split , RandomizedSearchCV
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
@@ -20,12 +19,15 @@ import matplotlib.pyplot as plt
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 
+"""
 logging.basicConfig(
     filename='activity.log',
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S'
 )
+"""
+logger = logging.getLogger(__name__) 
 
 class ModelTrainer: 
     """
@@ -127,23 +129,6 @@ class ModelTrainer:
         else:
             logging.error(f"Error loading data!!!")
             raise ValueError("trainpath or testpath not found in config.")
-        
-    def split_data(self, X, y, test_size=0.3, random_state=42):
-        """
-        Chia dữ liệu thành tập huấn luyện và tập kiểm tra.
-
-        Args:
-            X: Dữ liệu đặc trưng.
-            y: Nhãn mục tiêu.
-            test_size: Tỉ lệ dữ liệu dành cho kiểm tra (mặc định 0.3).
-            random_state: Giá trị cố định để tái lập (mặc định 42).
-        Returns:
-            X_train, X_test, y_train, y_test: Các tập dữ liệu sau khi chia.
-        """
-        
-        # 70% training and 30% test
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
-        return X_train, X_test, y_train, y_test
 
     # Trong file src/model.py -> class ModelTrainer
     def split_data(self, X, y, test_size=0.3, random_state=42, stratify=None):
@@ -296,14 +281,8 @@ class ModelTrainer:
 
     def auto_select_model(self):
         """
-        Tự động chạy tất cả mô hình (CatBoost, LightGBM, RandomForest, XGBoost),
-        tinh chỉnh tham số cho từng mô hình, đánh giá và chọn mô hình tốt nhất.
-
-        Ghi log toàn bộ quá trình và lưu file JSON kết quả từng mô hình.
-
-        Raises
-            ValueError
-                Nếu tất cả mô hình đều lỗi.
+        Tự động chạy tất cả mô hình, đánh giá, chọn mô hình tốt nhất 
+        và lưu bảng so sánh ra CSV.
         """
         print("Starting auto-selecting model....")
         logging.info("Starting auto-selecting model....")
@@ -312,6 +291,9 @@ class ModelTrainer:
         best_score = -1 
         best_model = None 
         best_name = ''
+        
+        # Danh sách chứa kết quả để lưu CSV
+        summary_results = []
 
         for m in models:
             try:
@@ -328,7 +310,22 @@ class ModelTrainer:
                 if hasattr(self.model, "predict_proba"):
                     y_proba = self.model.predict_proba(self.test[self.features])
                 
+                # Lưu file JSON chi tiết
                 self.save_metrics(m, y_proba, y_test, report, filename = f'evaluation_{m}.json')
+                
+                # --- Thêm thông tin vào bảng tổng hợp ---
+                summary_results.append({
+                    "Model": m,
+                    "Best_CV_Score": score,
+                    "Accuracy": report['accuracy'],
+                    "Precision_0": report['0']['precision'],
+                    "Recall_0": report['0']['recall'],
+                    "F1_Score_0": report['0']['f1-score'],
+                    "Precision_1": report['1']['precision'],
+                    "Recall_1": report['1']['recall'],
+                    "F1_Score_1": report['1']['f1-score'],
+                    "Macro_Avg_F1": report['macro avg']['f1-score']
+                })
 
                 if score > best_score: 
                     best_score = score 
@@ -337,6 +334,22 @@ class ModelTrainer:
             except Exception as e:
                 logging.error(f"Failed to train {m} : {e}")
                 print(f"     >{m} failed")
+
+        # --- Lưu bảng so sánh ra file CSV ---
+        if summary_results:
+            summary_df = pd.DataFrame(summary_results)
+            # Sắp xếp theo Accuracy giảm dần
+            summary_df = summary_df.sort_values(by="Accuracy", ascending=False)
+            
+            # Tạo đường dẫn lưu file
+            csv_path = os.path.join(self.model_dir, "model_comparison_summary.csv")
+            summary_df.to_csv(csv_path, index=False)
+            
+            print(f"\n[INFO] Đã lưu bảng so sánh mô hình vào: {csv_path}")
+            logging.info(f"Model comparison summary saved to {csv_path}")
+            print("-" * 50)
+            print(summary_df) # In ra màn hình để xem nhanh
+            print("-" * 50)
 
         if best_model is not None: 
             self.model = best_model 
@@ -385,6 +398,9 @@ class ModelTrainer:
             "roc_curve_data": roc_data
         }
         
+        if not os.path.exists(self.model_dir):
+            os.makedirs(self.model_dir)
+            
         # Tạo đường dẫn đầy đủ đến file
         file_path = os.path.join(self.model_dir, filename)
 
@@ -429,7 +445,6 @@ class ModelTrainer:
         
         return df
 
-
     def plot_evaluation_results(self, file_pattern = "evaluation_*.json"):
         """
         Đọc tất cả file JSON đánh giá và vẽ:
@@ -442,26 +457,50 @@ class ModelTrainer:
         file_pattern : str
             Pattern để đọc các file JSON (mặc định: "evaluation_*.json").
         """
-        files = glob.glob(file_pattern)
+        # Tạo đường dẫn tìm kiếm chính xác
+        # os.path.abspath giúp chuyển đổi đường dẫn tương đối thành tuyệt đối để debug dễ hơn
+        search_dir = os.path.abspath(self.model_dir)
+        search_path = os.path.join(search_dir, file_pattern)
+        
+        print(f"\n[DEBUG] Đang tìm kiếm file tại: {search_path}")
+        logging.info(f"Searching for evaluation files at: {search_path}")
+        
+        files = glob.glob(search_path)
+        
         if not files:
-            logging.error("No evaluation files found")
-            print("No evaluation files found")
+            msg = f"❌ KHÔNG TÌM THẤY FILE KẾT QUẢ NÀO TRONG: {search_dir}"
+            logging.error(msg)
+            print(msg)
+            
+            # Thử liệt kê các file đang có trong thư mục models để xem có file nào không
+            if os.path.exists(search_dir):
+                print(f"Các file hiện có trong thư mục models: {os.listdir(search_dir)}")
+            else:
+                print(f"Thư mục models không tồn tại!")
             return 
+        
+        print(f"[DEBUG] Tìm thấy {len(files)} file kết quả: {[os.path.basename(f) for f in files]}")
         
         results = [] 
         for file in files:
-            with open(file, 'r') as f:
-                data = json.load(f)
-                results.append(data)
+            try:
+                with open(file, 'r') as f:
+                    data = json.load(f)
+                    results.append(data)
+            except Exception as e:
+                logging.error(f"Lỗi khi đọc file {file}: {e}")
 
         if not results:
-            logging.error("No evaluation data loaded")
-            print("No evaluation data loaded")
+            logging.error("No valid evaluation data loaded")
+            print("No valid evaluation data loaded")
+            return
 
         logging.info(f"Found {len(results)} model evaluations. Generating plots....")
-        print(f"Found {len(results)} model evaluations. Generating plots....")
+        print(f"Generating plots for {len(results)} models....")
         
-        #---------------  BARPLOT (score comparison) -------------------
+        # --- PHẦN VẼ BIỂU ĐỒ (Giữ nguyên logic cũ nhưng cập nhật đường dẫn save) ---
+        
+        # 1. BARPLOT
         model_names = [res['model_name'] for res in results]
         accuracies = [res['report']['accuracy'] for res in results]
 
@@ -476,20 +515,21 @@ class ModelTrainer:
         plt.grid(axis='y', linestyle='--', alpha=0.7)
 
         for p in ax.patches:
-            if p.get_height() > 0: # Safety check
+            if p.get_height() > 0: 
                 ax.annotate(f'{p.get_height():.4f}', 
                         (p.get_x() + p.get_width() / 2., p.get_height()), 
                         ha = 'center', va = 'center', 
                         xytext = (0, 9), 
                         textcoords = 'offset points',
                         fontweight='bold')
-                
-        plt.savefig('comparison_barplot.png')
+        
+        # Lưu vào self.model_dir
+        save_path = os.path.join(self.model_dir, 'comparison_barplot.png')
+        plt.savefig(save_path)
         plt.close()
-        logging.info("Saved: comparison_barplot.png")
-        print("Saved: comparison_barplot.png")
+        print(f"Saved: {save_path}")
 
-        #---------------------ROC CURVE---------------------
+        # 2. ROC CURVE
         plt.figure(figsize=(10, 8))
         roc_plotted = False
 
@@ -513,49 +553,40 @@ class ModelTrainer:
             plt.title('ROC Curve Comparison')
             plt.legend(loc="lower right")
             plt.grid(alpha=0.3)
-            plt.savefig('comparison_roc_curve.png')
-            logging.info("Saved: comparison_roc_curve.png")
-            print("Saved: comparison_roc_curve.png")
-        else:
-            logging.error("No roc data found in files")
-            print("No roc data found in files")
+            
+            save_path = os.path.join(self.model_dir, 'comparison_roc_curve.png')
+            plt.savefig(save_path)
+            print(f"Saved: {save_path}")
         plt.close()
 
-
-        #-------------------------CONFUSION MATRICES---------------
+        # 3. CONFUSION MATRICES
         num_models = len(results)
         cols = 2
         rows = math.ceil(num_models / cols)
         
-        # Adjust figure size based on number of rows
         fig, axes = plt.subplots(rows, cols, figsize=(12, 5 * rows))
-        
-        # 1 model case
-        if num_models == 1:
-            axes = [axes]
-        else:
-            axes = axes.flatten()
+        if num_models == 1: axes = [axes]
+        else: axes = axes.flatten()
 
         for i, res in enumerate(results):
             name = res['model_name']
-            cm = np.array(res['confusion_matrix']) # Convert list back to numpy array
-            
+            cm = np.array(res['confusion_matrix'])
             sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', ax=axes[i], cbar=False)
             axes[i].set_title(f'{name}', fontsize=14)
             axes[i].set_ylabel('Actual Label')
             axes[i].set_xlabel('Predicted Label')
 
-        # Turn off unused subplots
         for j in range(i + 1, len(axes)):
             axes[j].axis('off')
 
         plt.tight_layout()
         # Lưu Confusion Matrix vào thư mục models
-        plt.savefig(os.path.join(self.model_dir, 'comparison_confusion_matrices.png'))
+        save_path = os.path.join(self.model_dir, 'comparison_confusion_matrices.png')
+        plt.savefig(save_path)
         plt.close()
         logging.info("Saved: comparison_confusion_matrices.png")
-        print("Saved: comparison_confusion_matrices.png")
-
+        print(f"Saved: {save_path}")
+        
     def save_model(self, filename = 'model.pkl'):
         """
         Lưu mô hình đã tinh chỉnh xuống file .pkl.
