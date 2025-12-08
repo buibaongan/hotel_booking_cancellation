@@ -93,7 +93,7 @@ class ModelTrainer:
 
     def __init__(self, config_path='config.ini'):
         self.config = configparser.ConfigParser()
-        self.config.read(config_path)
+        self.config.read(config_path, encoding='utf-8')
 
         self.features = self.config['DATA']['features'].split(',')
         self.target = self.config['DATA']['target']
@@ -123,6 +123,24 @@ class ModelTrainer:
         else:
             logging.error(f"Error loading data!!!")
             raise ValueError("trainpath or testpath not found in config.")
+        
+    def split_data(self, X, y, test_size=0.3, random_state=42):
+        """
+        Chia dữ liệu thành tập huấn luyện và tập kiểm tra.
+
+        Args:
+            X: Dữ liệu đặc trưng.
+            y: Nhãn mục tiêu.
+            test_size: Tỉ lệ dữ liệu dành cho kiểm tra (mặc định 0.3).
+            random_state: Giá trị cố định để tái lập (mặc định 42).
+
+        Returns:
+            X_train, X_test, y_train, y_test: Các tập dữ liệu sau khi chia.
+        """
+        
+        # 70% training and 30% test
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=random_state)
+        return X_train, X_test, y_train, y_test
 
     @staticmethod
     def evaluate(y_pred, y_test):
@@ -278,6 +296,7 @@ class ModelTrainer:
                 print(f"    {m}     score: {score:.4f}")
 
                 y_pred, y_test = self.train_predict()
+                self.get_feature_importance(m)
                 report = self.evaluate(y_pred, y_test)
 
                 y_proba = None
@@ -344,6 +363,39 @@ class ModelTrainer:
         with open(filename, 'w') as f:
             json.dump(eval_data, f, indent = 4)
         logging.info(f"Mectrics for {model_name} saved to {filename}")
+
+    def get_feature_importance(self, model_name):
+        """
+        Tính và lưu độ quan trọng của các đặc trưng (feature importance).
+
+        Tham số
+            model_name : str
+                Tên mô hình dùng để đặt tên file xuất ra.
+
+        Trả về
+            DataFrame
+                Bảng gồm tên feature và mức độ quan trọng, đã sắp xếp giảm dần.
+        """
+
+        if self.model is None:
+            raise ValueError("Model is not trained.")
+
+        if hasattr(self.model, "feature_importances_"):
+            importances = self.model.feature_importances_
+        elif hasattr(self.model, "get_feature_importance"):
+            importances = self.model.get_feature_importance()
+        else:
+            raise ValueError("Model does not support feature importance.")
+
+        df = pd.DataFrame({
+            "feature": self.features,
+            "importance": importances
+        }).sort_values("importance", ascending=False)
+
+        print(df)
+        df.to_csv(f"feature_importance{model_name}.csv", index=False)
+        logging.info(f" saved feature_importance{model_name}.csv")
+        return df
 
 
     def plot_evaluation_results(self, file_pattern = "evaluation_*.json"):
@@ -535,6 +587,7 @@ if __name__ == "__main__":
             print(f"Starting hyperparameter tuning for {args.model}...")
             trainer.optimize_params(model_name=args.model)
         trainer.train_predict()
+        trainer.get_feature_importance(args.model)
         trainer.save_model()
     else:
         print("No action selected. Use --tune to train the model.") 

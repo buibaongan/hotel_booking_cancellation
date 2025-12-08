@@ -1037,3 +1037,127 @@ THE BEST MODEL IS : RandomForest with accuracy 0.8760580385694722
     }
 }
 2025-12-07 17:50:07 - INFO - Model saved to model.pkl
+2025-12-08 15:28:06 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-08 15:28:06 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-08 15:28:07 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-08 17:49:07 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-08 17:49:07 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-08 17:49:07 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-08 17:49:07 - INFO - Tuning hyperparameters for CatBoost...
+2025-12-08 17:51:03 - INFO - Optimization complete. Best Params: {'learning_rate': 0.05, 'iterations': 500, 'depth': 8}
+2025-12-08 17:51:03 - INFO - Best CV Score: 0.8614
+2025-12-08 17:51:03 - INFO - Report: 
+2025-12-08 17:51:03 - INFO - 
+{
+    "0": {
+        "precision": 0.8690244362083045,
+        "recall": 0.9202421339719284,
+        "f1-score": 0.8939002326182476,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8493529337856515,
+        "recall": 0.7642736009044658,
+        "f1-score": 0.804570340395144,
+        "support": 8845.0
+    },
+    "accuracy": 0.8624675433453388,
+    "macro avg": {
+        "precision": 0.859188684996978,
+        "recall": 0.8422578674381971,
+        "f1-score": 0.8492352865066958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8617376266376384,
+        "recall": 0.8624675433453388,
+        "f1-score": 0.8608102377814375,
+        "support": 23878.0
+    }
+}
+2025-12-08 17:51:03 - INFO - Model saved to model.pkl
+2025-12-08 17:54:54 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-08 17:54:54 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-08 17:54:54 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-08 17:54:54 - INFO - Tuning hyperparameters for CatBoost...
+2025-12-08 17:56:51 - INFO - Optimization complete. Best Params: {'learning_rate': 0.05, 'iterations': 500, 'depth': 8}
+2025-12-08 17:56:51 - INFO - Best CV Score: 0.8614
+2025-12-08 17:56:51 - INFO - Report: 
+2025-12-08 17:56:51 - INFO - 
+{
+    "0": {
+        "precision": 0.8690244362083045,
+        "recall": 0.9202421339719284,
+        "f1-score": 0.8939002326182476,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8493529337856515,
+        "recall": 0.7642736009044658,
+        "f1-score": 0.804570340395144,
+        "support": 8845.0
+    },
+    "accuracy": 0.8624675433453388,
+    "macro avg": {
+        "precision": 0.859188684996978,
+        "recall": 0.8422578674381971,
+        "f1-score": 0.8492352865066958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8617376266376384,
+        "recall": 0.8624675433453388,
+        "f1-score": 0.8608102377814375,
+        "support": 23878.0
+    }
+}
+2025-12-08 17:56:51 - INFO - Model saved to model.pkl
+2025-12-08 17:59:14 - INFO - 
+
+
+ModelTrainer initialized.
+2025-12-08 17:59:14 - INFO - Loading data from C:\Users\Admin\Downloads\train_processed.csv...
+2025-12-08 17:59:14 - INFO - Loading data from C:\Users\Admin\Downloads\test_processed.csv...
+2025-12-08 17:59:14 - INFO - Tuning hyperparameters for CatBoost...
+2025-12-08 18:01:09 - INFO - Optimization complete. Best Params: {'learning_rate': 0.05, 'iterations': 500, 'depth': 8}
+2025-12-08 18:01:09 - INFO - Best CV Score: 0.8614
+2025-12-08 18:01:09 - INFO - Report: 
+2025-12-08 18:01:09 - INFO - 
+{
+    "0": {
+        "precision": 0.8690244362083045,
+        "recall": 0.9202421339719284,
+        "f1-score": 0.8939002326182476,
+        "support": 15033.0
+    },
+    "1": {
+        "precision": 0.8493529337856515,
+        "recall": 0.7642736009044658,
+        "f1-score": 0.804570340395144,
+        "support": 8845.0
+    },
+    "accuracy": 0.8624675433453388,
+    "macro avg": {
+        "precision": 0.859188684996978,
+        "recall": 0.8422578674381971,
+        "f1-score": 0.8492352865066958,
+        "support": 23878.0
+    },
+    "weighted avg": {
+        "precision": 0.8617376266376384,
+        "recall": 0.8624675433453388,
+        "f1-score": 0.8608102377814375,
+        "support": 23878.0
+    }
+}
+2025-12-08 18:01:09 - INFO -  saved feature_importanceCatBoost.csv
+2025-12-08 18:01:09 - INFO - Model saved to model.pkl
