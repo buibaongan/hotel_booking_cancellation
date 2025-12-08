@@ -604,5 +604,4 @@ class DataPreprocessor:
             None: Hàm thực hiện lưu file.
         """
         joblib.dump(self, path)
-
         print(f"Đã lưu Preprocessor tại {path}")
