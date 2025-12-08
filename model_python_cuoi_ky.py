@@ -1,7 +1,7 @@
 # Load libraries
 import pandas as pd
 import logging
-#from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
+from sklearn.tree import DecisionTreeClassifier # Import Decision Tree Classifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split , RandomizedSearchCV
 from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
@@ -9,12 +9,12 @@ from scipy.stats import randint
 import joblib  # Used for saving/loading models
 import argparse
 import configparser
-#from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
 import json
 import glob
 import seaborn as sns
 import math
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 from catboost import CatBoostClassifier
@@ -105,6 +105,12 @@ class ModelTrainer:
         self.test = None
         self.model = None
 
+        # --- TẠO THƯ MỤC LƯU KẾT QUẢ MODELS ---
+        self.model_dir = 'models'
+        if not os.path.exists(self.model_dir):
+            os.makedirs(self.model_dir)
+            logging.info(f"Created directory: {self.model_dir}")
+            
         logging.info("\n\n\nModelTrainer initialized.")
 
     def load_data(self):
@@ -378,10 +384,13 @@ class ModelTrainer:
             "confusion_matrix": cm.tolist(),
             "roc_curve_data": roc_data
         }
+        
+        # Tạo đường dẫn đầy đủ đến file
+        file_path = os.path.join(self.model_dir, filename)
 
-        with open(filename, 'w') as f:
+        with open(file_path, 'w') as f:
             json.dump(eval_data, f, indent = 4)
-        logging.info(f"Mectrics for {model_name} saved to {filename}")
+        logging.info(f"Mectrics for {model_name} saved to {file_path}")
 
     def get_feature_importance(self, model_name):
         """
@@ -412,8 +421,12 @@ class ModelTrainer:
         }).sort_values("importance", ascending=False)
 
         print(df)
-        df.to_csv(f"feature_importance{model_name}.csv", index=False)
-        logging.info(f" saved feature_importance{model_name}.csv")
+        
+        # Lưu file csv vào thư mục models
+        file_path = os.path.join(self.model_dir, f"feature_importance_{model_name}.csv")
+        df.to_csv(file_path, index=False)
+        logging.info(f" saved {file_path}")
+        
         return df
 
 
@@ -510,7 +523,6 @@ class ModelTrainer:
 
 
         #-------------------------CONFUSION MATRICES---------------
-
         num_models = len(results)
         cols = 2
         rows = math.ceil(num_models / cols)
@@ -538,12 +550,11 @@ class ModelTrainer:
             axes[j].axis('off')
 
         plt.tight_layout()
-        plt.savefig('comparison_confusion_matrices.png')
+        # Lưu Confusion Matrix vào thư mục models
+        plt.savefig(os.path.join(self.model_dir, 'comparison_confusion_matrices.png'))
         plt.close()
         logging.info("Saved: comparison_confusion_matrices.png")
         print("Saved: comparison_confusion_matrices.png")
-
-
 
     def save_model(self, filename = 'model.pkl'):
         """
@@ -552,14 +563,17 @@ class ModelTrainer:
         Parameters
         filename : str
             Tên file để lưu mô hình.
+
         Raises
             ValueError
                 Nếu mô hình chưa được huấn luyện.
         """
         if self.model is None:
             raise ValueError("Model not trained.")
-        joblib.dump(self.model, filename)
-        logging.info(f"Model saved to {filename}")
+        
+        file_path = os.path.join(self.model_dir, filename)
+        joblib.dump(self.model, file_path)
+        logging.info(f"Model saved to {file_path}")
 
     def load_model(self, filename = 'model.pkl'):
         """
@@ -572,8 +586,9 @@ class ModelTrainer:
 
         Nếu file không tồn tại, log sẽ thông báo.
         """
+        file_path = os.path.join(self.model_dir, filename)
         try: 
-            self.model = joblib.load(filename)
-            logging.info(f"Model loaded from {filename}")
+            self.model = joblib.load(file_path)
+            logging.info(f"Model loaded from {file_path}")
         except FileNotFoundError:
-            logging.info(f"File {filename} not found.")
+            logging.info(f"File {file_path} not found.")
