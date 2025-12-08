@@ -599,9 +599,10 @@ class DataPreprocessor:
         Lưu toàn bộ object DataPreprocessor (bao gồm các tham số đã học) ra file .joblib.
         Giúp tái sử dụng pipeline cho việc dự đoán sau này (Inference).
         Args:
-            path (str): Đường dẫn file lưu trữ (ví dụ: 'models/preprocessor.joblib').
+            path (str): Đường dẫn file lưu trữ (ví dụ: 'reports/preprocessor.joblib').
         Returns:
             None: Hàm thực hiện lưu file.
         """
         joblib.dump(self, path)
+
         print(f"Đã lưu Preprocessor tại {path}")
