@@ -52,8 +52,8 @@ Hãy thực hiện tuần tự theo các bước sau để đảm bảo chương
 Làm sạch dữ liệu, mã hóa biến phân loại và chia tập Train/Test.
 * Chạy file `src/main.py`
 * Dữ liệu sau khi xử lý và chia train/test được lưu vào:
-  * `data/processed/train.csv` 
-  * `data/processed/test.csv`
+  * `data/processed/train_processed.csv` 
+  * `data/processed/test_processed.csv`
 
 **Bước 3: Huấn luyện & Dự đoán (Modeling)**
 Mở Terminal tại thư mục dự án và sử dụng các lệnh sau:
