@@ -183,7 +183,7 @@ class DataPreprocessor:
             try:
                 df[col] = pd.to_datetime(df[col], errors='coerce')
                 df[f"{col}_year"] = df[col].dt.year
-                df[f"{col}_month"] = df[col].dt.month
+                df[f"{col}_month"] = pd.Categorical(df[col].dt.month, categories=range(1,13))
                 df[f"{col}_day"] = df[col].dt.day
                 df[f"{col}_weekday"] = df[col].dt.weekday
                 df.drop(columns=[col], inplace=True)
@@ -340,7 +340,7 @@ class DataPreprocessor:
                 cols_onehot.append(col)
 
         if cols_onehot:
-            df = pd.get_dummies(df, columns=cols_onehot, drop_first=True, dtype=int)
+            df = pd.get_dummies(df, columns=cols_onehot, drop_first=False, dtype=int)
         if mode == 'fit_transform':
             self.onehot_columns = df.columns.tolist()
         elif self.onehot_columns:
@@ -520,7 +520,7 @@ class DataPreprocessor:
                 df_to_save = pd.concat([df, y], axis=1)
             else:
                 df_to_save = df
-                
+
             file_path = os.path.join(output_dir, filename)
             df_to_save.to_csv(file_path, index=False)
             print(f"Đã lưu dữ liệu vào: {file_path} (Shape: {df_to_save.shape})")
