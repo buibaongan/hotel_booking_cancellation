@@ -145,8 +145,9 @@ def main():
     preprocessor.save_processed_data(X_test_processed, filename="test_processed.csv", y=y_test_raw)
     
     # Lưu preprocessor để dùng lại
-    preprocessor.save_preprocessor("models/preprocessor.joblib")
+    preprocessor.save_preprocessor("reports/preprocessor.joblib")
     logger.info("*** Hoàn tất pipeline xử lý dữ liệu.")
 
 if __name__ == "__main__":
+
     main()
