@@ -130,7 +130,6 @@ class ModelTrainer:
             logging.error(f"Error loading data!!!")
             raise ValueError("trainpath or testpath not found in config.")
 
-    # Trong file src/model.py -> class ModelTrainer
     def split_data(self, X, y, test_size=0.3, random_state=42, stratify=None):
         """
         Chia dữ liệu thành tập huấn luyện và tập kiểm tra.
@@ -145,7 +144,6 @@ class ModelTrainer:
             X_train, X_test, y_train, y_test: Các tập dữ liệu sau khi chia.
         """
         
-        # Thêm tham số stratify vào hàm train_test_split
         X_train, X_test, y_train, y_test = train_test_split(
             X, y, 
             test_size=test_size, 
@@ -468,7 +466,7 @@ class ModelTrainer:
         files = glob.glob(search_path)
         
         if not files:
-            msg = f"❌ KHÔNG TÌM THẤY FILE KẾT QUẢ NÀO TRONG: {search_dir}"
+            msg = f"*** KHÔNG TÌM THẤY FILE KẾT QUẢ NÀO TRONG: {search_dir}"
             logging.error(msg)
             print(msg)
             
@@ -623,3 +621,44 @@ class ModelTrainer:
             logging.info(f"Model loaded from {file_path}")
         except FileNotFoundError:
             logging.info(f"File {file_path} not found.")
+
+"""
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Train Hotel Booking Models")
+    
+    # Add arguments
+    parser.add_argument('--config', type=str, default='config.ini', help='Path to configuration file')
+    parser.add_argument('--tune', action='store_true', help='Flag to run hyperparameter tuning')
+    parser.add_argument('--model', type=str, default='CatBoost', 
+                        choices=['CatBoost', 'LightGBM', 'XGBoost' , 'RandomForest', 'Auto'], 
+                        help='Which algorithm to use')
+
+    # Parse arguments
+    args = parser.parse_args()
+
+    # Workflow huấn luyện
+    trainer = ModelTrainer(config_path=args.config)
+    
+    # Hàm này sẽ tự động đọc train_processed.csv từ config
+    try:
+        trainer.load_data()
+    except Exception as e:
+        logging.error(f"Lỗi khi load data: {e}")
+        print("Hãy chắc chắn bạn đã chạy 'python main.py' để tạo dữ liệu trước.")
+        exit()
+    
+    if args.tune:
+        if args.model == 'Auto':
+            trainer.auto_select_model()
+            trainer.plot_evaluation_results()
+        else:
+            print(f"Starting hyperparameter tuning for {args.model}...")
+            trainer.optimize_params(model_name=args.model)
+            trainer.train_predict()
+            try:
+                trainer.get_feature_importance(args.model)
+            except: pass
+            trainer.save_model()
+    else:
+        print("No action selected. Use --tune to train the model.")
+"""
