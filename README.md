@@ -84,6 +84,7 @@ RandomForest hoặc randomforest hoặc rf
 
 
 ## V. CẤU TRÚC THƯ MỤC DỰ ÁN
+* Sau khi chạy xong, thư mục dự án có cấu trúc như sau:
 ```bash
 MY_PROJECT/
 │
