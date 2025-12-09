@@ -383,10 +383,10 @@ class DataPreprocessor:
                 cols_onehot.append(col)
 
         if cols_onehot:
-            # Sinh ra cột chứa ký tự lạ (VD: Transient-Party)
+            # Mã hóa One-Hot
             df = pd.get_dummies(df, columns=cols_onehot, drop_first=False, dtype=int)
             
-            # --- OPTIMIZATION: Làm sạch tên cột ngay lập tức ---
+            # Làm sạch tên cột (bỏ ký tự lạ)
             df = self.clean_column_names(df)
 
         if mode == 'fit_transform':
