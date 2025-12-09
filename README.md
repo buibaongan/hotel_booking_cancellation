@@ -88,6 +88,7 @@ RandomForest hoặc randomforest hoặc rf
 ```bash
 MY_PROJECT/
 │
+├── main.py                     # Hàm chạy chính
 ├── config.ini                  # File cấu hình chính
 ├── README.md                   # File hướng dẫn
 ├── requirements.txt            # Danh sách thư viện
@@ -120,11 +121,11 @@ MY_PROJECT/
 │
 ├── reports/                    # Báo cáo 
 │   ├── images/                 # Thư mục chứa ảnh bổ trợ 
-│   ├── FULL_EDA_REPORT.html    # Báo cáo HTML nằm ngay ngoài
+│   ├── FULL_EDA_REPORT.html    # Báo cáo HTML
+│   ├── eda_activity            # Nhật ký chạy EDA (log file)
 │   └── preprocessor.joblib     # File xử lý dữ liệu
 │
 └── src/                        # Mã nguồn
-    ├── main.py
     ├── generate_EDA_report.py
     ├── preprocessing.py
     └── model.py
