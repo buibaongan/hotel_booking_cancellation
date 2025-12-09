@@ -90,47 +90,23 @@ Các file `.pkl` (Pickle) và `.joblib` là dạng file nhị phân lưu trữ o
 
 Để xem nội dung các file này một cách chi tiết, hãy thực hiện theo các bước sau:
 
-**Bước 1: Khởi tạo môi trường ảo**
-
-Mở Terminal tại thư mục gốc của dự án (`MY_PROJECT`), chạy lệnh:
-
-```bash
-python -m venv venv
-```
-
-**Bước 2:** Kích hoạt môi trường:
- * Với Windows (PowerShell / VS Code):
-```bash
-.\venv\Scripts\activate
-```
-* Với macOS / Linux:
-```bash
-source venv/bin/activate
-```
-*Sau khi kích hoạt, đầu dòng lệnh Terminal sẽ xuất hiện chữ màu xanh:* **(venv)**
-
-
-
-**Bước 3:** 
-* Mở file `check_results.py` tại thư mục gốc của dự án (`MY_PROJECT/`)
-
+**Bước 1:**
 * Mở Terminal (phím tắt: `ctrl + ~`) tại thư mục dự án và chạy lệnh:
 ```bash
 python check_results.py
 ```
-**Bước 4:** 
+**Bước 2:** 
 *  Nhập số thứ tự file muốn xem
 ```bash
-========================================
- CHƯƠNG TRÌNH KIỂM TRA FILE KẾT QUẢ
-========================================
-[1] models\evaluation_CatBoost.json
-[2] models\evaluation_LightGBM.json
-[3] models\evaluation_RandomForest.json
-[4] models\evaluation_XGBoost.json
-[5] reports\model.pkl
+ --- CHƯƠNG TRÌNH KIỂM TRA FILE KẾT QUẢ ---
+[1] models\best_model.pkl
+[2] models\evaluation_CatBoost.json
+[3] models\evaluation_LightGBM.json
+[4] models\evaluation_RandomForest.json
+[5] models\evaluation_XGBoost.json
 [6] reports\preprocessor.joblib
 [0] Thoát
+
 
 ```
 
