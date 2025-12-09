@@ -126,6 +126,7 @@ MY_PROJECT/
 │   └── preprocessor.joblib     # File xử lý dữ liệu
 │
 └── src/                        # Mã nguồn
+    ├── __init__.py             # File rỗng báo Python biết src là 1 package
     ├── generate_EDA_report.py
     ├── preprocessing.py
     └── model.py
