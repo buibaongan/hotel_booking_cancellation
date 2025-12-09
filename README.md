@@ -123,8 +123,6 @@ MY_PROJECT/
 ├── activity.log                # Nhật ký chạy (Log file)
 ├── check_results.py            # Xem kết quả các file joblib, pkl, json
 │
-├── ven                         # Môi trường ven để chạy file check_results.py
-│
 ├── data/                       # Dữ liệu
 │   ├── raw
 │   │   └── hotel_bookings.csv
