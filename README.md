@@ -83,8 +83,57 @@ LightGBM hoặc lightgbm hoặc lgbm
 RandomForest hoặc randomforest hoặc rf
 ```
 
+## V. HƯỚNG DẪN ĐỌC CÁC FILE KẾT QUẢ (.pkl, .joblib, .json)
 
-## V. CẤU TRÚC THƯ MỤC DỰ ÁN
+Các file `.pkl` (Pickle) và `.joblib` là dạng file nhị phân lưu trữ object của Python (Model, Preprocessor), do đó **không thể mở xem trực tiếp bằng Notepad** (sẽ bị lỗi font).
+
+Để xem nội dung các file này một cách chi tiết, hãy thực hiện theo các bước sau:
+
+**Bước 1: Khởi tạo môi trường ảo**
+
+Mở Terminal tại thư mục gốc của dự án (`MY_PROJECT`), chạy lệnh:
+
+```bash
+python -m venv venv
+```
+
+**Bước 2:** Kích hoạt môi trường:
+ * Với Windows (PowerShell / VS Code):
+```bash
+.\venv\Scripts\activate
+```
+* Với macOS / Linux:
+```bash
+source venv/bin/activate
+```
+*Sau khi kích hoạt, đầu dòng lệnh Terminal sẽ xuất hiện chữ màu xanh:* **(venv)**
+
+
+
+**Bước 3:** 
+* Mở file `check_results.py` tại thư mục gốc của dự án (`MY_PROJECT/`)
+
+* Mở Terminal (phím tắt: `ctrl + ~`) tại thư mục dự án và chạy lệnh:
+```bash
+python check_results.py
+```
+**Bước 4:** 
+*  Nhập số thứ tự file muốn xem
+```bash
+========================================
+ CHƯƠNG TRÌNH KIỂM TRA FILE KẾT QUẢ
+========================================
+[1] models\evaluation_CatBoost.json
+[2] models\evaluation_LightGBM.json
+[3] models\evaluation_RandomForest.json
+[4] models\evaluation_XGBoost.json
+[5] reports\preprocessor.joblib
+[0] Thoát
+
+```
+
+
+## VI. CẤU TRÚC THƯ MỤC DỰ ÁN
 * Sau khi chạy xong, thư mục dự án có cấu trúc như sau:
 ```bash
 MY_PROJECT/
@@ -94,6 +143,9 @@ MY_PROJECT/
 ├── README.md                   # File hướng dẫn
 ├── requirements.txt            # Danh sách thư viện
 ├── activity.log                # Nhật ký chạy (Log file)
+├── check_results.py            # Xem kết quả các file joblib, pkl, json
+│
+├── ven                         # Môi trường ven để chạy file check_results.py
 │
 ├── data/                       # Dữ liệu
 │   ├── raw
