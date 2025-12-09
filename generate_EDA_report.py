@@ -15,7 +15,7 @@ LOG_FILE = os.path.join(REPORT_DIR, "eda_activity.log")
 # Tạo thư mục nếu chưa có
 os.makedirs(IMG_DIR, exist_ok=True)
 
-# --- CẤU HÌNH LOGGING (Bỏ icon, format đơn giản) ---
+# --- CẤU HÌNH LOGGING ---
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -27,7 +27,7 @@ logging.basicConfig(
 
 class EDAHotelBooking:
     def __init__(self, df):
-        logging.info("Bat dau khoi tao lop EDAHotelBooking...")
+        logging.info("Bắt đầu khởi tạo lớp EDAHotelBooking...")
         self.df = df.copy()
         self.img_count = 0
         
@@ -52,7 +52,7 @@ class EDAHotelBooking:
                     self.df[col] = self.df[col].apply(lambda x: str(x) if pd.notnull(x) else np.nan)
             
             logging.info(f" Đã xử lý sơ bộ dữ liệu. Kích thước: {self.df.shape}")
-           
+            
         except Exception as e:
             logging.error(f"Lỗi trong quá trình khởi tạo: {str(e)}")
             raise e
@@ -231,7 +231,7 @@ class EDAHotelBooking:
         main_color = "#3498db"
         numeric_insights = f"""
         <div class="comment-box" style="background-color: #e8f4f8; border: 2px solid {main_color}; margin-top: 20px;">
-            <h3 style="color: #3498db;">📈 NHẬN XÉT THỐNG KÊ MÔ TẢ BIẾN SỐ</h3>
+            <h3 style="color: #3498db;">NHẬN XÉT THỐNG KÊ MÔ TẢ BIẾN SỐ</h3>
             <ul>
                 <li><b>lead_time:</b> Trung bình 104 ngày, dao động 0–737.</li>
                 <li><b>arrival_date_week_number:</b> Trung bình tuần 27.17, từ 1–53.</li>
@@ -249,7 +249,7 @@ class EDAHotelBooking:
                 <li><b>required_car_parking_spaces:</b> Trung bình 0.06, tối đa 8.</li>
                 <li><b>total_of_special_requests:</b> Trung bình 0.57, tối đa 5.</li>
             </ul>
-            <h4 style="color: #e74c3c;">⚠️ NOISY DATA FEATURE</h4>
+            <h4 style="color: #e74c3c;">NOISY DATA FEATURE</h4>
             <ul>
                 <li><b>adr:</b> Giá âm (-6.38) không hợp lý → có thể lỗi dữ liệu.</li>
                 <li><b>adults:</b> Giá trị tối thiểu 0 → có thể lỗi nếu không có người lớn.</li>
