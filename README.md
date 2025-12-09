@@ -1,5 +1,6 @@
 # **PROJECT CUỐI KỲ**
 **MÔN HỌC: PYTHON CHO KHOA HỌC DỮ LIỆU**
+**Mã học phần:** MTH10605
 
 **CHỦ ĐỀ: DỰ ĐOÁN KHẢ NĂNG HỦY ĐẶT PHÒNG KHÁCH SẠN**
 *(Hotel Booking Cancellation Prediction)*
@@ -34,10 +35,10 @@ pip install -r requirements.txt
 [DATA]
 # Đường dẫn đến file dữ liệu
 [PREPROCESSING]
-inputpath =  D:\Program Files\final_project\data\raw\hotel_bookings.csv
+inputpath =  D:\Program Files\MY_PROJECT\data\raw\hotel_bookings.csv
 
-trainpath = D:\Program Files\final_project\data\processed\train_processed.csv
-testpath = D:\Program Files\final_project\data\processed\test_processed.csv
+trainpath = D:\Program Files\MY_PROJECT\data\processed\train_processed.csv
+testpath = D:\Program Files\MY_PROJECT\data\processed\test_processed.csv
 ...
 # Phần còn lại giữ nguyên
 ```
@@ -47,15 +48,15 @@ Hãy thực hiện tuần tự theo các bước sau để đảm bảo chương
 
 **Bước 1: Khám phá dữ liệu (EDA)**
 1. Mở folder `src`
-2. Chạy file generate_EDA_report.py
+2. Chạy file `generate_EDA_report.py`
 3. **Kết quả**: Mở file `reports/images/FULL_EDA_REPORT.html` để xem báo cáo EDA chi tiết.
 
 **Bước 2: Tiền xử lý dữ liệu (Preprocessing)**
 Làm sạch dữ liệu, mã hóa biến phân loại và chia tập Train/Test.
 * Chạy file `src/main.py`
 * Dữ liệu sau khi xử lý và chia train/test được lưu vào:
-  * `data/processed/train.csv` 
-  * `data/processed/test.csv`
+  * `MY_PROJECT/data/processed/train.csv` 
+  * `MY_PROJECT/data/processed/test.csv`
 
 **Bước 3: Huấn luyện & Dự đoán (Modeling)**
 Trong Terminal, gõ các lệnh sau:
