@@ -128,7 +128,8 @@ python check_results.py
 [2] models\evaluation_LightGBM.json
 [3] models\evaluation_RandomForest.json
 [4] models\evaluation_XGBoost.json
-[5] reports\preprocessor.joblib
+[5] reports\model.pkl
+[6] reports\preprocessor.joblib
 [0] Thoát
 
 ```
