@@ -5,9 +5,7 @@ import logging
 import argparse
 import configparser
 
-# =========================================================
 # CẤU HÌNH LOGGING & MÔI TRƯỜNG
-# =========================================================
 os.makedirs("reports", exist_ok=True)
 os.makedirs("models", exist_ok=True) 
 os.makedirs("data/processed", exist_ok=True)
@@ -30,9 +28,7 @@ print(f"Log file đang được ghi tại: {os.path.abspath('activity.log')}")
 from src.preprocessing import DataPreprocessor
 from src.model import ModelTrainer 
 
-# =========================================================
-# HÀM FEATURE ENGINEERING
-# =========================================================
+# HÀM FEATURE ENGINEERING ĐẶC THÙ CHO DỮ LIỆU KHÁCH SẠN
 def hotel_feature_engineering(df):
     logger.info("*** Đang thực hiện Feature Engineering đặc thù...")
     df = df.copy()
@@ -62,9 +58,7 @@ def hotel_feature_engineering(df):
     
     return df
 
-# =========================================================
 # MAIN PROGRAM 
-# =========================================================
 def main():
     parser = argparse.ArgumentParser(description="Data Preprocessing Pipeline")
     parser.add_argument('--config', type=str, default='config.ini', help='Path to configuration file')
@@ -88,9 +82,7 @@ def main():
     
     temp_prep = DataPreprocessor(target_col=TARGET_COL)
 
-    # ---------------------------------------------------------
-    # 1. LOAD & CLEAN
-    # ---------------------------------------------------------
+    # ------ 1. LOAD & CLEAN ------
     logger.info("Load dữ liệu và loại bỏ cột rác...")
     df = pd.read_csv(INPUT_PATH, dtype={'agent': 'object', 'company': 'object'})
     
@@ -110,9 +102,7 @@ def main():
     df.drop(columns=existing, inplace=True)
     logger.info(f"   -> Đã xóa {len(existing)} cột.")
     
-    # ---------------------------------------------------------
-    # 2. FEATURE ENGINEERING AND FILL MISSING VALUES
-    # ---------------------------------------------------------
+    # ------ 2. FEATURE ENGINEERING AND FILL MISSING VALUES ------
     # Create new features
     logger.info(" Feature Engineering (Custom)...")
     df = hotel_feature_engineering(df)
@@ -122,9 +112,7 @@ def main():
     df = temp_prep.fill_missing(df, num_strategy='median', cat_strategy='mode', mode='fit_transform')
     logger.info(f"   -> Shape sau khi xử lý sơ bộ: {df.shape}")
     
-    # ---------------------------------------------------------
-    # 3. SPLIT DATA
-    # ---------------------------------------------------------
+    # ------ 3. SPLIT DATA ------
     logger.info("3. Chia dữ liệu Train / Test ...")
     X = df.drop(columns=[TARGET_COL])
     y = df[TARGET_COL]
@@ -136,9 +124,8 @@ def main():
     )
     logger.info(f"   -> Train shape: {X_train_raw.shape}, Test shape: {X_test_raw.shape}")
 
-    # ---------------------------------------------------------
-    # 4. PREPROCESSING (OUTLIER, ENCODE, SCALE)
-    # ---------------------------------------------------------model
+    # ------ 4. PREPROCESSING (OUTLIER, ENCODE, SCALE) ------
+    # model
     logger.info("4. Chạy Pipeline Tiền xử lý (Outlier, Encode, Scale)...")
     preprocessor = DataPreprocessor(target_col=TARGET_COL)
     
@@ -148,7 +135,7 @@ def main():
     logger.info("   -> Đang xử lý tập Test...")
     X_test_processed = preprocessor.transform(X_test_raw)
     
-    # 5. Lưu
+    # Lưu dữ liệu đã xử lý
     logger.info("   -> Lưu dữ liệu đã xử lý vào thư mục data/processed ...")
     preprocessor.save_processed_data(X_train_processed, filename="train_processed.csv", y=y_train_processed)
     preprocessor.save_processed_data(X_test_processed, filename="test_processed.csv", y=y_test_raw)
@@ -157,17 +144,15 @@ def main():
     preprocessor.save_preprocessor("reports/preprocessor.joblib")
     logger.info("HOÀN TẤT PREPROCESSING.")
         
-    # ==============================================================================
     # PAUSE & CONFIRMATION STEP
-    # ==============================================================================
     print("\n" + "="*70)
     print("GÕ 'model' ĐỂ TIẾP TỤC CHẠY MODEL (Gõ 'exit' để thoát)")
     print("="*70)
     
     try:
-        # 1. Vòng lặp chọn 'model' hoặc 'exit'
+        # ------ 1. Vòng lặp chọn 'model' hoặc 'exit' ------
         while True:
-            user_input = input(">> ").strip().lower() # Chuyển về chữ thường hết
+            user_input = input(">> ").strip().lower() 
             
             if user_input == 'exit':
                 print("Đã thoát chương trình.")
@@ -178,14 +163,14 @@ def main():
             
             print("Nhập sai! Hãy gõ 'model' để tiếp tục hoặc 'exit' để thoát.")
 
-        # 2. Chọn thuật toán 
+        # ------ 2. Chọn thuật toán ------
         print("\n" + "-"*50)
         print("CHỌN THUẬT TOÁN: Auto, CatBoost, XGBoost, LightGBM, RandomForest")
         
         # Nhập và xử lý chuỗi
         raw_model_input = input(">> Nhập tên model (Mặc định 'Auto' nếu bỏ trống): ").strip().lower()
         
-        # Dictionary ánh xạ từ input người dùng -> Tên chuẩn trong code
+        # Dictionary ánh xạ từ input người dùng sang tên chuẩn
         model_map = {
             'auto': 'Auto',
             'catboost': 'CatBoost',
@@ -206,27 +191,32 @@ def main():
         
         logger.info(f"*** BẮT ĐẦU QUY TRÌNH HUẤN LUYỆN: {model_name}...")
         
-        # ---------------------------------------------------------
-        # 5. MODEL TRAINING & EVALUATION
-        # ---------------------------------------------------------
-        # Khởi tạo trainer và load data (vừa được save ở trên)
+        # ------ 5. MODEL TRAINING & EVALUATION ------
+        # Khởi tạo trainer
         trainer = ModelTrainer(config_path=args.config)
         trainer.load_data()
         
         # Logic chạy model
         if model_name == 'Auto':
+            # Chế độ Auto tự động lưu 'best_model.pkl' bên trong hàm
             trainer.auto_select_model()
             trainer.plot_evaluation_results()
         else:
+            # Chế độ thường
             trainer.optimize_params(model_name=model_name)
             trainer.train_predict()
             try:
                 trainer.get_feature_importance(model_name)
             except: pass
-            trainer.save_model()
+            
+            # Đặt tên file theo thuật toán 
+            save_name = f"{model_name}.pkl"
+            trainer.save_model(filename=save_name)
+            logger.info(f"*** ĐÃ LƯU MODEL TẠI: models/{save_name}")
+            print(f"\n*** ĐÃ LƯU MODEL TẠI: models/{save_name}")
             
         print("\n*** ĐÃ HOÀN TẤT HUẤN LUYỆN MODEL!")
-            
+        
     except KeyboardInterrupt:
         print("\nĐã thoát chương trình.")
     
