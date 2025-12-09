@@ -1,5 +1,6 @@
 # **PROJECT CUỐI KỲ**
 **MÔN HỌC: PYTHON CHO KHOA HỌC DỮ LIỆU**
+
 **Mã học phần:** MTH10605
 
 **CHỦ ĐỀ: DỰ ĐOÁN KHẢ NĂNG HỦY ĐẶT PHÒNG KHÁCH SẠN**
