@@ -59,7 +59,7 @@ Làm sạch dữ liệu, mã hóa biến phân loại và chia tập Train/Test.
 
 **Bước 3: Huấn luyện & Dự đoán (Modeling)**
 Trong Terminal, gõ các lệnh sau:
-1. GÕ 'model' ĐỂ TIẾP TỤC CHẠY MODEL (Gõ 'exit' để thoát)
+1. Gõ `model` để tiếp tục chạy model (Gõ `exit` để thoát)
 2. Gõ tên model muốn chạy
 
 **A. Chế độ Tự động (Khuyên dùng)**
