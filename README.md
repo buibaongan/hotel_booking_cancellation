@@ -107,6 +107,7 @@ python check_results.py
 [6] reports\preprocessor.joblib
 [0] Thoát
 
+*** Nhập số thứ tự file muốn xem: 
 
 ```
 
