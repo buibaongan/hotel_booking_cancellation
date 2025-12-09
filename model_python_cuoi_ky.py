@@ -3,7 +3,7 @@ import pandas as pd
 import logging
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split , RandomizedSearchCV
-from sklearn import metrics #Import scikit-learn metrics module for accuracy calculation
+from sklearn import metrics # Import scikit-learn metrics module for accuracy calculation
 from scipy.stats import randint
 import joblib  # Used for saving/loading models
 import argparse
@@ -19,14 +19,6 @@ import matplotlib.pyplot as plt
 from catboost import CatBoostClassifier
 from lightgbm import LGBMClassifier
 
-"""
-logging.basicConfig(
-    filename='activity.log',
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-"""
 logger = logging.getLogger(__name__) 
 
 class ModelTrainer: 
@@ -621,44 +613,3 @@ class ModelTrainer:
             logging.info(f"Model loaded from {file_path}")
         except FileNotFoundError:
             logging.info(f"File {file_path} not found.")
-
-"""
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train Hotel Booking Models")
-    
-    # Add arguments
-    parser.add_argument('--config', type=str, default='config.ini', help='Path to configuration file')
-    parser.add_argument('--tune', action='store_true', help='Flag to run hyperparameter tuning')
-    parser.add_argument('--model', type=str, default='CatBoost', 
-                        choices=['CatBoost', 'LightGBM', 'XGBoost' , 'RandomForest', 'Auto'], 
-                        help='Which algorithm to use')
-
-    # Parse arguments
-    args = parser.parse_args()
-
-    # Workflow huấn luyện
-    trainer = ModelTrainer(config_path=args.config)
-    
-    # Hàm này sẽ tự động đọc train_processed.csv từ config
-    try:
-        trainer.load_data()
-    except Exception as e:
-        logging.error(f"Lỗi khi load data: {e}")
-        print("Hãy chắc chắn bạn đã chạy 'python main.py' để tạo dữ liệu trước.")
-        exit()
-    
-    if args.tune:
-        if args.model == 'Auto':
-            trainer.auto_select_model()
-            trainer.plot_evaluation_results()
-        else:
-            print(f"Starting hyperparameter tuning for {args.model}...")
-            trainer.optimize_params(model_name=args.model)
-            trainer.train_predict()
-            try:
-                trainer.get_feature_importance(args.model)
-            except: pass
-            trainer.save_model()
-    else:
-        print("No action selected. Use --tune to train the model.")
-"""
