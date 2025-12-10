@@ -1,161 +1,173 @@
-import joblib
-import json
-import os
-import sys
-import numpy as np
+# **PROJECT CUỐI KỲ**
+**MÔN HỌC: PYTHON CHO KHOA HỌC DỮ LIỆU**
 
-# Thêm đường dẫn để load được class tự định nghĩa trong src (nếu cần)
-sys.path.append(os.getcwd())
+**Mã học phần:** MTH10605
 
-def read_pkl_or_joblib(path):
-    """
-    Hàm đọc chung cho cả .pkl và .joblib (SỬ DỤNG JOBLIB.LOAD).
-    Kết hợp logic hiển thị của cả 2 hàm cũ.
-    """
-    print(f"\n--- ĐANG ĐỌC FILE (JOBLIB/PKL): {path} ---")
-    try:
-        # --- DÙNG JOBLIB ĐỂ LOAD ---
-        content = joblib.load(path)
-        
-        print("--- LOAD THÀNH CÔNG ---")
-        print(f"Loại object: {type(content)}")
-        print("\n--- CHI TIẾT ---")
+**CHỦ ĐỀ: DỰ ĐOÁN KHẢ NĂNG HỦY ĐẶT PHÒNG KHÁCH SẠN**
+*(Hotel Booking Cancellation Prediction)*
 
-        # Nếu object có hàm get_params (thường là model sklearn/xgboost...), in tham số ra
-        if hasattr(content, 'get_params'):
-            print("\nTHAM SỐ MODEL:")
-            print(content.get_params())
+## I. GIỚI THIỆU
+Dự án xây dựng mô hình Machine Learning nhằm dự đoán khách hàng có hủy đặt phòng hay không, hỗ trợ khách sạn:
+* Giảm rủi ro phòng trống đột xuất
+* Tối ưu doanh thu
+* Chủ động chính sách đặt phòng
 
-        # --- IN TOP 5 FEATURE IMPORTANCE ---
-        if hasattr(content, 'feature_importances_'):
-            print("\nTOP 5 FEATURE IMPORTANCE:")
-            try:
-                importances = content.feature_importances_
-                indices = np.argsort(importances)[::-1] # Sắp xếp giảm dần
-                
-                # Cố gắng tìm tên cột (Feature Names)
-                feature_names = None
-                
-                # Sklearn thường lưu trong feature_names_in_
-                if hasattr(content, 'feature_names_in_'):
-                    feature_names = content.feature_names_in_
-                # CatBoost/XGBoost có thể lưu trong feature_names_
-                elif hasattr(content, 'feature_names_'):
-                    feature_names = content.feature_names_
-                
-                # In ra Top 5
-                print(f" (Tổng số features: {len(importances)})")
-                for i in range(min(5, len(importances))):
-                    idx = indices[i]
-                    score = importances[idx]
-                    
-                    if feature_names is not None and len(feature_names) > idx:
-                        name = feature_names[idx]
-                        print(f"  {i+1}. {name}: {score:.4f}")
-                    else:
-                        print(f"  {i+1}. Feature_{idx}: {score:.4f}")
-            except Exception as e:
-                print(f"  -> Không thể trích xuất (Lỗi: {e})")
+**Dataset**: `hotel_bookings.csv`
+* **Input**: Thông tin khách hàng, loại phòng, thời gian đặt, tiền cọc...
+* **Output**: `0` (Không hủy) hoặc `1` (Hủy).
 
-        # NẾU LÀ CLASS TỰ ĐỊNH NGHĨA / PIPELINE (Dùng vars)
-        # Dùng hàm vars() để liệt kê các thuộc tính
-        try:
-            attributes = vars(content)
-            if attributes:
-                print("\nCÁC THUỘC TÍNH:")
-                for key, value in attributes.items():
-                    print(f"[Thuộc tính]: {key}")
-                    print(f"  -> Giá trị: {value}")
-                    
-                    # xem ColumnTransformer
-                    if hasattr(value, 'transformers_'): 
-                        print("  -> (Đây là ColumnTransformer, các bước xử lý:)")
-                        for name, trans, cols in value.transformers_:
-                            print(f"      + Bước '{name}': áp dụng lên {cols}")
-            else:
-                # Nếu không có vars (ví dụ list, dict thuần), in trực tiếp
-                if not hasattr(content, 'get_params'): # Tránh in lại nếu đã in params
-                    print(f"Nội dung: {content}")
+## II. CÀI ĐẶT MÔI TRƯỜNG
+**1. Yêu cầu hệ thống**
+* Python 3.8 trở lên.
+* RAM: Khuyến nghị 8GB trở lên.
 
-        except TypeError:
-            pass
+**2. Cài đặt thư viện**
+Chạy lệnh sau trong Terminal/Command Prompt để cài đặt các thư viện cần thiết:
+```bash
+pip install -r requirements.txt
+```
+***Lưu ý:*** Đảm bảo bạn đang đứng ở thư mục **MY_PROJECT** chứa file `requirements.txt`.
 
-    except Exception as e:
-        print(f"Lỗi: {e}")
+## III. CẤU HÌNH (Config.ini)
+* Dự án sử dụng file `config.ini` có sẵn trong folder **MY_PROJECT** để quản lý mọi tham số.
+* ***Lưu ý***:  Thay đổi đường dẫn `path` trong file bằng đường dẫn trong máy bạn để chạy cho đúng 
+* **Ví dụ**
+```ini
+[DATA]
+# Đường dẫn đến file dữ liệu
+[PREPROCESSING]
+inputpath =  D:\Program Files\MY_PROJECT\data\raw\hotel_bookings.csv
 
-def read_json(path):
-    print(f"\n--- ĐANG ĐỌC FILE JSON: {path} ---")
-    try:
-        with open(path, 'r', encoding='utf-8') as f:
-            content = json.load(f)
-        
-        print("--- TÓM TẮT NỘI DUNG ---")
-        for key, value in content.items():
-            if isinstance(value, list):
-                print(f"- {key}: Danh sách gồm {len(value)} phần tử (Đã ẩn chi tiết)")
-            elif isinstance(value, dict):
-                print(f"- {key}:")
-                for sub_key, sub_value in value.items():
-                    if isinstance(sub_value, list):
-                        print(f"  + {sub_key}: Danh sách {len(sub_value)} phần tử")
-                    else:
-                        print(f"  + {sub_key}: {sub_value}")
-            else:
-                print(f"- {key}: {value}")
-                
-    except Exception as e:
-        print("Lỗi:", e)
+trainpath = D:\Program Files\MY_PROJECT\data\processed\train_processed.csv
+testpath = D:\Program Files\MY_PROJECT\data\processed\test_processed.csv
+...
+# Phần còn lại giữ nguyên
+```
 
-def get_list_files():
-    files = []
-    folders_to_scan = ['models', 'reports']
-    
-    for folder in folders_to_scan:
-        if os.path.exists(folder):
-            for f in os.listdir(folder):
-                if f.endswith(('.pkl', '.joblib', '.json')):
-                    files.append(os.path.join(folder, f))
-    return files
+## IV. QUY TRÌNH CHẠY DỰ ÁN
+Hãy thực hiện tuần tự theo các bước sau để đảm bảo chương trình chạy đúng:
 
-def main():
-    while True:
-        print(" --- CHƯƠNG TRÌNH KIỂM TRA FILE KẾT QUẢ ---")
-        
-        files = get_list_files()
-        
-        if not files:
-            print("*** Không tìm thấy file nào trong thư mục models/ hoặc reports/")
-            break
+**Bước 1: Khám phá dữ liệu (EDA)**
+1. Mở folder `src`
+2. Chạy file `generate_EDA_report.py`
+3. **Kết quả**: Mở file `reports/images/FULL_EDA_REPORT.html` để xem báo cáo EDA chi tiết.
 
-        for i, file_path in enumerate(files):
-            print(f"[{i + 1}] {file_path}")
-        print("[0] Thoát")
+**Bước 2: Tiền xử lý dữ liệu (Preprocessing)**
+Làm sạch dữ liệu, mã hóa biến phân loại và chia tập Train/Test.
+* Chạy file `src/main.py`
+* Dữ liệu sau khi xử lý và chia train/test được lưu vào:
+  * `MY_PROJECT/data/processed/train.csv` 
+  * `MY_PROJECT/data/processed/test.csv`
 
-        choice = input("\n*** Nhập số thứ tự file muốn xem: ")
+**Bước 3: Huấn luyện & Dự đoán (Modeling)**
+Trong Terminal, gõ các lệnh sau:
+1. Gõ `model` để tiếp tục chạy model (Gõ `exit` để thoát)
+2. Gõ tên model muốn chạy
 
-        if choice == '0':
-            print("Đã thoát chương trình.")
-            break
-        
-        try:
-            idx = int(choice) - 1
-            if 0 <= idx < len(files):
-                selected_file = files[idx]
-                
-                # cùng chạy file .pkl và .joblib
-                if selected_file.endswith(('.joblib', '.pkl')):
-                    read_pkl_or_joblib(selected_file)
-                elif selected_file.endswith('.json'):
-                    read_json(selected_file)
-                
-                input("\n(Nhấn Enter để quay lại menu...)")
-            else:
-                print("\n*** Lỗi: Số không hợp lệ!")
-        except ValueError:
-            print("\n*** Lỗi: Vui lòng chỉ nhập số!")
+**A. Chế độ Tự động (Khuyên dùng)**
+* Hệ thống chạy tất cả model (CatBoost, XGBoost, LightGBM, RandomForest) và chọn cái tốt nhất:
+```bash
+Auto hoặc auto
+```
+**B. Chạy từng thuật toán riêng lẻ**
+```bash
+# CatBoost
+CatBoost hoặc catboost hoặc cat
 
-if __name__ == "__main__":
-    main()
+# XGBoost
+XGBoost  hoặc xgboost hoặc xgb
 
-    # Chạy lệnh sau trong terminal
-    # python check_results.py
+# LightGBM
+LightGBM hoặc lightgbm hoặc lgbm
+
+# RandomForest
+RandomForest hoặc randomforest hoặc rf
+```
+
+## V. HƯỚNG DẪN ĐỌC CÁC FILE KẾT QUẢ (.pkl, .joblib, .json)
+
+Các file `.pkl` (Pickle) và `.joblib` là dạng file nhị phân lưu trữ object của Python (Model, Preprocessor), do đó **không thể mở xem trực tiếp bằng Notepad** (sẽ bị lỗi font).
+
+Để xem nội dung các file này một cách chi tiết, hãy thực hiện theo các bước sau:
+
+**Bước 1:**
+* Mở Terminal (phím tắt: `ctrl + ~`) tại thư mục dự án và chạy lệnh:
+```bash
+python check_results.py
+```
+**Bước 2:** 
+*  Nhập số thứ tự file muốn xem
+```bash
+ --- CHƯƠNG TRÌNH KIỂM TRA FILE KẾT QUẢ ---
+[1] models\best_model.pkl
+[2] models\evaluation_CatBoost.json
+[3] models\evaluation_LightGBM.json
+[4] models\evaluation_RandomForest.json
+[5] models\evaluation_XGBoost.json
+[6] reports\preprocessor.joblib
+[0] Thoát
+
+*** Nhập số thứ tự file muốn xem: 
+
+```
+
+
+## VI. CẤU TRÚC THƯ MỤC DỰ ÁN
+* Sau khi chạy xong, thư mục dự án có cấu trúc như sau:
+```bash
+MY_PROJECT/
+│
+├── main.py                     # Hàm chạy chính
+├── config.ini                  # File cấu hình chính
+├── README.md                   # File hướng dẫn
+├── requirements.txt            # Danh sách thư viện
+├── activity.log                # Nhật ký chạy (Log file)
+├── check_results.py            # Xem kết quả các file joblib, pkl, json
+│
+├── data/                       # Dữ liệu
+│   ├── raw
+│   │   └── hotel_bookings.csv
+│   └── processed
+│       ├── train_processed.csv
+│       └── test_processed.csv
+│
+├── models/                     # Chứa Model và Kết quả đánh giá 
+│   ├── model.pkl                       # File model chính đã train
+│   │
+│   ├── comparison_barplot.png          # Biểu đồ so sánh
+│   ├── comparison_confusion_matrices.png
+│   ├── comparison_roc_curve.png
+│   │
+│   ├── evaluation_CatBoost.json        # Kết quả đánh giá chi tiết (JSON)
+│   ├── evaluation_LightGBM.json
+│   ├── evaluation_RandomForest.json
+│   ├── evaluation_XGBoost.json
+│   │
+│   ├── feature_importance_CatBoost.csv # Mức độ quan trọng của biến (CSV)
+│   ├── feature_importance_LightGBM.csv
+│   ├── feature_importance_RandomForest.csv
+│   ├── feature_importance_XGBoost.csv
+│   └── model_comparison_summary.csv    # Bảng tổng hợp so sánh
+│
+├── reports/                    # Báo cáo 
+│   ├── images/                 # Thư mục chứa ảnh bổ trợ 
+│   ├── FULL_EDA_REPORT.html    # Báo cáo HTML
+│   ├── eda_activity            # Nhật ký chạy EDA (log file)
+│   └── preprocessor.joblib     # File xử lý dữ liệu
+│
+└── src/                        # Mã nguồn
+    ├── __init__.py             # File rỗng báo Python biết src là 1 package
+    ├── generate_EDA_report.py
+    ├── preprocessing.py
+    └── model.py
+```
+
+## SỰ CỐ THƯỜNG GẶP
+|        Vấn đề       |          Nguyên nhân         |                           Cách khắc phục                          |
+|:-------------------:|:----------------------------:|:-----------------------------------------------------------------:|
+| ModuleNotFoundError | Chưa cài thư viện            | Chạy lại lệnh: pip install -r requirements.txt                    |
+| Lỗi MemoryError     | Dữ liệu quá lớn gây tràn RAM | Giảm n_jobs xuống số nhỏ (ví dụ 2). Giảm cv xuống 3 trong config. |
+| File not found      | Sai đường dẫn trong config   | Kiểm tra lại mục [DATA] trong config.ini, đảm bảo tên file đúng.  |
+| UnicodeDecodeError  | File config bị lỗi font chữ  | Mở file config.ini, chọn Save As -> Encoding: UTF-8.              |
+
+
