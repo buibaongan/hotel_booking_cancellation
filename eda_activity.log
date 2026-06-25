@@ -1,0 +1,79 @@
+2025-12-09 18:52:10,215 - INFO - Script bắt đầu lúc: 2025-12-09 18:52:10.215136
+2025-12-09 18:52:10,903 - INFO - Bat dau khoi tao lop EDAHotelBooking...
+2025-12-09 18:52:12,754 - INFO -  Đã xử lý sơ bộ dữ liệu. Kích thước: (119390, 35)
+2025-12-09 18:52:12,754 - INFO - Đang vẽ biểu đồ và phân tích dữ liệu...
+2025-12-09 18:52:13,780 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:13,901 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:14,257 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:14,386 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:14,833 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:14,918 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:15,301 - INFO - Đã lưu biểu đồ 1: Biểu đồ Hộp (Boxplot) phát hiện Outlier
+2025-12-09 18:52:20,471 - INFO - Đã lưu biểu đồ 2: Phân phối các biến số (Histogram)
+2025-12-09 18:52:20,817 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:20,873 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:21,673 - INFO - Đã lưu biểu đồ 3: Thống kê các nhóm phân loại
+2025-12-09 18:52:21,943 - INFO - Đã lưu biểu đồ 4: Nguồn khách theo Quốc gia
+2025-12-09 18:52:22,261 - INFO - Đã lưu biểu đồ 5: Rủi ro hủy theo từng phân khúc
+2025-12-09 18:52:23,693 - INFO - Đã lưu biểu đồ 6: Phân phối Lead Time: Hủy vs Không hủy
+2025-12-09 18:52:24,408 - INFO - Đã lưu biểu đồ 7: Mối quan hệ: deposit_type và is_canceled
+2025-12-09 18:52:24,823 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:25,087 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 18:52:25,277 - INFO - Đã lưu biểu đồ 8: Mối quan hệ: total_of_special_requests vs is_canceled
+2025-12-09 18:52:25,911 - INFO - Đã lưu biểu đồ 9: Ma trận tương quan (Correlation Matrix)
+2025-12-09 18:52:25,912 - INFO - Đang tạo báo cáo HTML...
+2025-12-09 18:52:26,670 - INFO - Đã xuất báo cáo đầy đủ tại: reports\FULL_EDA_REPORT.html
+2025-12-09 18:52:26,713 - INFO - Script kết thúc lúc: 2025-12-09 18:52:26.712315
+2025-12-09 21:56:02,348 - INFO - Script bắt đầu lúc: 2025-12-09 21:56:02.348757
+2025-12-09 21:57:02,290 - INFO - Script bắt đầu lúc: 2025-12-09 21:57:02.290224
+2025-12-09 21:57:02,600 - INFO - Bắt đầu khởi tạo lớp EDAHotelBooking...
+2025-12-09 21:57:03,432 - INFO -  Đã xử lý sơ bộ dữ liệu. Kích thước: (119390, 35)
+2025-12-09 21:57:03,434 - INFO - Đang vẽ biểu đồ và phân tích dữ liệu...
+2025-12-09 21:57:04,322 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:04,408 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:04,693 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:04,782 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:05,153 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:05,248 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:05,569 - INFO - Đã lưu biểu đồ 1: Biểu đồ Hộp (Boxplot) phát hiện Outlier
+2025-12-09 21:57:12,561 - INFO - Đã lưu biểu đồ 2: Phân phối các biến số (Histogram)
+2025-12-09 21:57:13,234 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:13,346 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:14,943 - INFO - Đã lưu biểu đồ 3: Thống kê các nhóm phân loại
+2025-12-09 21:57:15,568 - INFO - Đã lưu biểu đồ 4: Nguồn khách theo Quốc gia
+2025-12-09 21:57:16,146 - INFO - Đã lưu biểu đồ 5: Rủi ro hủy theo từng phân khúc
+2025-12-09 21:57:17,962 - INFO - Đã lưu biểu đồ 6: Phân phối Lead Time: Hủy vs Không hủy
+2025-12-09 21:57:18,931 - INFO - Đã lưu biểu đồ 7: Mối quan hệ: deposit_type và is_canceled
+2025-12-09 21:57:19,310 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:19,450 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 21:57:19,765 - INFO - Đã lưu biểu đồ 8: Mối quan hệ: total_of_special_requests vs is_canceled
+2025-12-09 21:57:20,716 - INFO - Đã lưu biểu đồ 9: Ma trận tương quan (Correlation Matrix)
+2025-12-09 21:57:20,716 - INFO - Đang tạo báo cáo HTML...
+2025-12-09 21:57:21,534 - INFO - Đã xuất báo cáo đầy đủ tại: reports\FULL_EDA_REPORT.html
+2025-12-09 21:57:21,577 - INFO - Script kết thúc lúc: 2025-12-09 21:57:21.577300
+2025-12-09 22:05:37,571 - INFO - Script bắt đầu lúc: 2025-12-09 22:05:37.571965
+2025-12-09 22:05:37,897 - INFO - Bắt đầu khởi tạo lớp EDAHotelBooking...
+2025-12-09 22:05:38,676 - INFO -  Đã xử lý sơ bộ dữ liệu. Kích thước: (119390, 35)
+2025-12-09 22:05:38,676 - INFO - Đang vẽ biểu đồ và phân tích dữ liệu...
+2025-12-09 22:05:39,113 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:39,186 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:39,401 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:39,473 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:39,713 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:39,784 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:40,077 - INFO - Đã lưu biểu đồ 1: Biểu đồ Hộp (Boxplot) phát hiện Outlier
+2025-12-09 22:05:44,499 - INFO - Đã lưu biểu đồ 2: Phân phối các biến số (Histogram)
+2025-12-09 22:05:44,778 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:44,827 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:45,492 - INFO - Đã lưu biểu đồ 3: Thống kê các nhóm phân loại
+2025-12-09 22:05:45,712 - INFO - Đã lưu biểu đồ 4: Nguồn khách theo Quốc gia
+2025-12-09 22:05:45,946 - INFO - Đã lưu biểu đồ 5: Rủi ro hủy theo từng phân khúc
+2025-12-09 22:05:47,061 - INFO - Đã lưu biểu đồ 6: Phân phối Lead Time: Hủy vs Không hủy
+2025-12-09 22:05:47,520 - INFO - Đã lưu biểu đồ 7: Mối quan hệ: deposit_type và is_canceled
+2025-12-09 22:05:47,777 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:47,872 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-12-09 22:05:48,040 - INFO - Đã lưu biểu đồ 8: Mối quan hệ: total_of_special_requests vs is_canceled
+2025-12-09 22:05:48,539 - INFO - Đã lưu biểu đồ 9: Ma trận tương quan (Correlation Matrix)
+2025-12-09 22:05:48,539 - INFO - Đang tạo báo cáo HTML...
+2025-12-09 22:05:49,179 - INFO - Đã xuất báo cáo đầy đủ tại: reports\FULL_EDA_REPORT.html
+2025-12-09 22:05:49,211 - INFO - Script kết thúc lúc: 2025-12-09 22:05:49.211661
