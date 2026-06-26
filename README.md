@@ -30,59 +30,53 @@ pip install -r requirements.txt
 
 ## III. CẤU HÌNH (Config.ini)
 * Dự án sử dụng file `config.ini` có sẵn trong folder **MY_PROJECT** để quản lý mọi tham số.
-* ***Lưu ý***:  Thay đổi đường dẫn `path` trong file bằng đường dẫn trong máy bạn để chạy cho đúng 
+* ***Lưu ý***: Thay đổi đường dẫn `inputpath`, `trainpath`, `testpath` nếu bạn đặt dữ liệu ở vị trí khác.
 * **Ví dụ**
 ```ini
-[DATA]
-# Đường dẫn đến file dữ liệu
 [PREPROCESSING]
-inputpath =  D:\Program Files\MY_PROJECT\data\raw\hotel_bookings.csv
+inputpath = data/raw/hotel_bookings.csv
 
-trainpath = D:\Program Files\MY_PROJECT\data\processed\train_processed.csv
-testpath = D:\Program Files\MY_PROJECT\data\processed\test_processed.csv
-...
-# Phần còn lại giữ nguyên
+[DATA]
+trainpath = data/processed/train_processed.csv
+testpath = data/processed/test_processed.csv
+target = is_canceled
 ```
 
 ## IV. QUY TRÌNH CHẠY DỰ ÁN
 Hãy thực hiện tuần tự theo các bước sau để đảm bảo chương trình chạy đúng:
 
 **Bước 1: Khám phá dữ liệu (EDA)**
-1. Mở folder `src`
-2. Chạy file `generate_EDA_report.py`
-3. **Kết quả**: Mở file `reports/images/FULL_EDA_REPORT.html` để xem báo cáo EDA chi tiết.
+1. Đứng ở thư mục gốc dự án.
+2. Chạy `python src/generate_EDA_report.py`.
+3. **Kết quả**: Mở file `reports/FULL_EDA_REPORT.html` để xem báo cáo EDA chi tiết.
 
 **Bước 2: Tiền xử lý dữ liệu (Preprocessing)**
 Làm sạch dữ liệu, mã hóa biến phân loại và chia tập Train/Test.
-* Chạy file `src/main.py`
+* Chạy:
+```bash
+python main.py --preprocess-only
+```
 * Dữ liệu sau khi xử lý và chia train/test được lưu vào:
-  * `MY_PROJECT/data/processed/train.csv` 
-  * `MY_PROJECT/data/processed/test.csv`
+  * `MY_PROJECT/data/processed/train_processed.csv`
+  * `MY_PROJECT/data/processed/test_processed.csv`
 
 **Bước 3: Huấn luyện & Dự đoán (Modeling)**
-Trong Terminal, gõ các lệnh sau:
-1. Gõ `model` để tiếp tục chạy model (Gõ `exit` để thoát)
-2. Gõ tên model muốn chạy
+Có thể chạy không cần nhập tương tác:
 
 **A. Chế độ Tự động (Khuyên dùng)**
-* Hệ thống chạy tất cả model (CatBoost, XGBoost, LightGBM, RandomForest) và chọn cái tốt nhất:
+* Hệ thống chạy tất cả model (CatBoost, XGBoost, LightGBM, RandomForest) và chọn model tốt nhất theo CV score:
 ```bash
-Auto hoặc auto
+python main.py --model Auto --no-prompt
 ```
 **B. Chạy từng thuật toán riêng lẻ**
 ```bash
-# CatBoost
-CatBoost hoặc catboost hoặc cat
-
-# XGBoost
-XGBoost  hoặc xgboost hoặc xgb
-
-# LightGBM
-LightGBM hoặc lightgbm hoặc lgbm
-
-# RandomForest
-RandomForest hoặc randomforest hoặc rf
+python main.py --model CatBoost --no-prompt
+python main.py --model XGBoost --no-prompt
+python main.py --model LightGBM --no-prompt
+python main.py --model RandomForest --no-prompt
 ```
+
+Nếu chạy `python main.py` không truyền `--model`, chương trình sẽ hỏi tên model trong terminal.
 
 ## V. HƯỚNG DẪN ĐỌC CÁC FILE KẾT QUẢ (.pkl, .joblib, .json)
 
@@ -132,7 +126,7 @@ MY_PROJECT/
 │       └── test_processed.csv
 │
 ├── models/                     # Chứa Model và Kết quả đánh giá 
-│   ├── model.pkl                       # File model chính đã train
+│   ├── best_model.pkl                  # File model tốt nhất khi chạy Auto
 │   │
 │   ├── comparison_barplot.png          # Biểu đồ so sánh
 │   ├── comparison_confusion_matrices.png
@@ -152,14 +146,16 @@ MY_PROJECT/
 ├── reports/                    # Báo cáo 
 │   ├── images/                 # Thư mục chứa ảnh bổ trợ 
 │   ├── FULL_EDA_REPORT.html    # Báo cáo HTML
-│   ├── eda_activity            # Nhật ký chạy EDA (log file)
+│   ├── eda_activity.log        # Nhật ký chạy EDA
 │   └── preprocessor.joblib     # File xử lý dữ liệu
 │
 └── src/                        # Mã nguồn
     ├── __init__.py             # File rỗng báo Python biết src là 1 package
     ├── generate_EDA_report.py
     ├── preprocessing.py
-    └── model.py
+    ├── model.py
+    ├── api.py
+    └── pipeline.py
 ```
 
 ## SỰ CỐ THƯỜNG GẶP
@@ -170,4 +166,117 @@ MY_PROJECT/
 | File not found      | Sai đường dẫn trong config   | Kiểm tra lại mục [DATA] trong config.ini, đảm bảo tên file đúng.  |
 | UnicodeDecodeError  | File config bị lỗi font chữ  | Mở file config.ini, chọn Save As -> Encoding: UTF-8.              |
 
+## VII. FASTAPI PREDICTION API
 
+Dự án có API dự đoán trong `src/api.py`.
+
+**Cài thư viện**
+```bash
+pip install -r requirements.txt
+```
+
+**Chạy API**
+```bash
+uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
+```
+
+Sau đó mở:
+```text
+http://localhost:8000/docs
+```
+
+**Health check**
+```bash
+curl http://localhost:8000/health
+```
+
+**Dự đoán với dữ liệu đã xử lý**
+
+Nếu chỉ có `models/best_model.pkl` mà chưa có `reports/preprocessor.joblib`, hãy gửi đầy đủ các feature đã xử lý và thêm `processed=true`. Xem danh sách feature bằng:
+
+```bash
+curl http://localhost:8000/metadata
+```
+
+```bash
+curl -X POST "http://localhost:8000/predict?processed=true" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "booking": {
+      "hotel": 0,
+      "lead_time": 0.12,
+      "arrival_date_week_number": 0.5,
+      "arrival_date_day_of_month": 0.3,
+      "is_repeated_guest": 0,
+      "previous_cancellations": 0,
+      "previous_bookings_not_canceled": 0,
+      "booking_changes": 0,
+      "deposit_type": 0,
+      "days_in_waiting_list": 0,
+      "adr": 0.02,
+      "required_car_parking_spaces": 0,
+      "total_of_special_requests": 0.2,
+      "total_nights": 0.05,
+      "total_guests": 0.04,
+      "has_children": 0,
+      "is_domestic": 1,
+      "is_room_changed": 0
+    }
+  }'
+```
+
+**Dự đoán với dữ liệu booking thô**
+
+Muốn gửi dữ liệu thô như `hotel`, `meal`, `country`, `adults`, `children`..., cần có `reports/preprocessor.joblib`. Model và preprocessor nên được tạo từ cùng một lần chạy pipeline để tránh lệch schema feature.
+
+```bash
+python main.py --model Auto --no-prompt
+```
+
+Nếu model hiện tại đã được train đúng với preprocessor hiện tại, có thể chỉ chạy `python main.py --preprocess-only`.
+
+Ví dụ request:
+```bash
+curl -X POST "http://localhost:8000/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "booking": {
+      "hotel": "City Hotel",
+      "lead_time": 120,
+      "arrival_date_month": "August",
+      "arrival_date_week_number": 32,
+      "arrival_date_day_of_month": 12,
+      "stays_in_weekend_nights": 1,
+      "stays_in_week_nights": 3,
+      "adults": 2,
+      "children": 0,
+      "babies": 0,
+      "meal": "BB",
+      "country": "PRT",
+      "market_segment": "Online TA",
+      "distribution_channel": "TA/TO",
+      "reserved_room_type": "A",
+      "assigned_room_type": "A",
+      "deposit_type": "No Deposit",
+      "customer_type": "Transient",
+      "is_repeated_guest": 0,
+      "previous_cancellations": 0,
+      "previous_bookings_not_canceled": 0,
+      "booking_changes": 0,
+      "days_in_waiting_list": 0,
+      "adr": 100,
+      "required_car_parking_spaces": 0,
+      "total_of_special_requests": 1
+    }
+  }'
+```
+
+API trả về:
+```json
+{
+  "prediction": 1,
+  "label": "Canceled",
+  "probability": 0.78,
+  "risk_level": "High"
+}
+```
