@@ -57,9 +57,9 @@ class BookingCancellationPipeline:
 
     def run_preprocessing(self) -> None:
         if not os.path.exists(self.input_path):
-            raise FileNotFoundError(f"Không tìm thấy file dữ liệu: {self.input_path}")
+            raise FileNotFoundError(f"Data file not found: {self.input_path}")
 
-        logger.info("Load dữ liệu gốc: %s", self.input_path)
+        logger.info("Loading raw data: %s", self.input_path)
         raw = pd.read_csv(self.input_path, dtype={"agent": "object", "company": "object"})
         preprocessor = DataPreprocessor(target_col=self.target_col)
 
@@ -87,7 +87,7 @@ class BookingCancellationPipeline:
         preprocessor.save_processed_data(X_train, train_file, output_dir=train_dir, y=y_train)
         preprocessor.save_processed_data(X_test, test_file, output_dir=test_dir, y=y_test)
         preprocessor.save_preprocessor("reports/preprocessor.joblib")
-        logger.info("HOÀN TẤT PREPROCESSING.")
+        logger.info("PREPROCESSING COMPLETE.")
 
     def run_training(self, model_name: str) -> None:
         trainer = ModelTrainer(config_path=self.config_path)
@@ -100,7 +100,7 @@ class BookingCancellationPipeline:
 
         trainer.run_model(model_name)
         trainer.save_model(filename=f"{model_name}.pkl")
-        logger.info("Đã lưu model tại models/%s.pkl", model_name)
+        logger.info("Saved model to models/%s.pkl", model_name)
 
     def run(self, model_name: str = "Auto") -> None:
         self.run_preprocessing()
@@ -108,7 +108,7 @@ class BookingCancellationPipeline:
 
 def ask_model_name() -> str:
     print("\n" + "=" * 70)
-    print("GÕ 'model' ĐỂ TIẾP TỤC CHẠY MODEL (Gõ 'exit' để thoát)")
+    print("TYPE 'model' TO CONTINUE TRAINING (type 'exit' to quit)")
     print("=" * 70)
 
     while True:
@@ -117,11 +117,11 @@ def ask_model_name() -> str:
             raise KeyboardInterrupt
         if action == "model":
             break
-        print("Nhập sai! Hãy gõ 'model' để tiếp tục hoặc 'exit' để thoát.")
+        print("Invalid input. Type 'model' to continue or 'exit' to quit.")
 
     print("\n" + "-" * 50)
-    print("CHỌN THUẬT TOÁN: Auto, CatBoost, XGBoost, LightGBM, RandomForest")
-    raw = input(">> Nhập tên model (Mặc định 'Auto' nếu bỏ trống): ").strip().lower()
+    print("CHOOSE AN ALGORITHM: Auto, CatBoost, XGBoost, LightGBM, RandomForest")
+    raw = input(">> Enter the model name (defaults to 'Auto' if blank): ").strip().lower()
     return MODEL_ALIASES.get(raw, "Auto")
 
 
@@ -143,14 +143,14 @@ def main() -> None:
         if args.preprocess_only:
             return
         model_name = args.model or ("Auto" if args.no_prompt else ask_model_name())
-        print(f"-> Thuật toán được chọn: {model_name}")
+        print(f"-> Selected algorithm: {model_name}")
         pipeline.run_training(model_name)
-        print("\n*** ĐÃ HOÀN TẤT HUẤN LUYỆN MODEL!")
+        print("\n*** MODEL TRAINING COMPLETE!")
     except KeyboardInterrupt:
-        print("\nĐã thoát chương trình.")
+        print("\nProgram exited.")
     except Exception as error:
         logger.exception("Pipeline failed")
-        print(f"*** Lỗi pipeline: {error}")
+        print(f"*** Pipeline error: {error}")
 
 
 if __name__ == "__main__":

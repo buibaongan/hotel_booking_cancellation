@@ -3,139 +3,139 @@ import json
 import os
 import sys
 
-# Thêm đường dẫn hiện tại để máy hiểu (tránh lỗi nếu file nằm trong thư mục con)
+# Add the current path so imports work even when the file is run from a subfolder.
 sys.path.append('.')
 
 def xem_file_pkl_joblib(duong_dan):
     print("\n" + "-"*30)
-    print(f"ĐANG ĐỌC FILE: {duong_dan}")
-    
+    print(f"READING FILE: {duong_dan}")
+
     try:
-        # Load file lên
+        # Load the file.
         data = joblib.load(duong_dan)
-        print("Đã load xong!")
-        print(f"Loại dữ liệu: {type(data)}")
-        
-        # 1. NẾU LÀ MODEL (Có tham số)
-        # Kiểm tra xem biến 'data' có hàm lấy tham số không
+        print("Loaded successfully!")
+        print(f"Data type: {type(data)}")
+
+        # 1. If this is a model with parameters.
+        # Check whether data has a parameter getter.
         if hasattr(data, 'get_params'):
-            print("\n[THAM SỐ CỦA MODEL]:")
+            print("\n[MODEL PARAMETERS]:")
             params = data.get_params()
             print(params)
 
         # 2. FEATURE IMPORTANCES
-        # Kiểm tra xem model có tính năng này không
+        # Check whether the model exposes feature importances.
         if hasattr(data, 'feature_importances_'):
-            print("\n[TOP 5 ĐẶC TRƯNG QUAN TRỌNG]:")
-            
-            # Lấy danh sách điểm số
+            print("\n[TOP 5 IMPORTANT FEATURES]:")
+
+            # Get importance scores.
             scores = data.feature_importances_
-            
-            # Cố tìm tên cột (nếu có lưu)
+
+            # Try to find feature names if they were saved.
             feature_names = []
             if hasattr(data, 'feature_names_in_'):
                 feature_names = data.feature_names_in_
             elif hasattr(data, 'feature_names_'):
                 feature_names = data.feature_names_
-            
-            # Tạo danh sách các cặp (tên, điểm) để sắp xếp
+
+            # Create name/score pairs for sorting.
             danh_sach = []
             for i in range(len(scores)):
                 diem = scores[i]
-                # Nếu có tên cột thì lấy, không thì đặt là Feature_0, Feature_1...
+                # Use saved feature names when available; otherwise fall back to Feature_0, Feature_1, ...
                 if len(feature_names) > i:
                     ten = feature_names[i]
                 else:
                     ten = f"Feature_{i}"
                 danh_sach.append((ten, diem))
             
-            # Sắp xếp danh sách theo điểm giảm dần
+            # Sort by descending importance score.
             danh_sach_sap_xep = sorted(danh_sach, key=lambda x: x[1], reverse=True)
-            
-            # In ra 5 cái đầu tiên
+
+            # Print the first 5 items.
             for i in range(5):
                 if i < len(danh_sach_sap_xep):
                     print(f"  {i+1}. {danh_sach_sap_xep[i][0]}: {danh_sach_sap_xep[i][1]:.4f}")
 
-        # 3. NẾU LÀ OBJECT KHÁC (Pipeline)
-        # Dùng hàm vars() để xem các biến bên trong
-        print("\n[THÔNG TIN KHÁC]:")
+        # 3. Other objects, such as a pipeline.
+        # Use vars() to inspect internal attributes.
+        print("\n[OTHER INFORMATION]:")
         try:
             thong_tin = vars(data)
             for ten, gia_tri in thong_tin.items():
                 print(f"- {ten}: {gia_tri}")
         except:
-            print("Không đọc được chi tiết biến bên trong.")
+            print("Could not read internal attribute details.")
 
     except Exception as loi:
-        print(f"Có lỗi xảy ra: {loi}")
+        print(f"An error occurred: {loi}")
 
 def xem_file_json(duong_dan):
     print("\n" + "-"*30)
-    print(f"ĐANG ĐỌC FILE JSON: {duong_dan}")
-    
+    print(f"READING JSON FILE: {duong_dan}")
+
     try:
         with open(duong_dan, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
-        print("--- NỘI DUNG ---")
-        # Duyệt qua từng dòng trong json
+
+        print("--- CONTENT ---")
+        # Iterate through each JSON key.
         for key in data:
             value = data[key]
-            
-            # Nếu là danh sách dài quá thì chỉ in số lượng
+
+            # If the value is a long list, print only the item count.
             if type(value) == list:
-                print(f"- {key}: (Danh sách có {len(value)} phần tử)")
-            
-            # Nếu là từ điển con (dict) thì in chi tiết hơn xíu
+                print(f"- {key}: (List with {len(value)} items)")
+
+            # If the value is a nested dictionary, print it in more detail.
             elif type(value) == dict:
                 print(f"- {key}:")
                 for k_con, v_con in value.items():
                     print(f"   + {k_con}: {v_con}")
-            
-            # Còn lại in bình thường
+
+            # Otherwise, print normally.
             else:
                 print(f"- {key}: {value}")
-                
+
     except Exception as loi:
-        print(f"Lỗi đọc JSON: {loi}")
+        print(f"JSON read error: {loi}")
 
 def lay_danh_sach_file():
     ds_file = []
     cac_thu_muc = ['models', 'reports']
-    
+
     for thu_muc in cac_thu_muc:
-        # Kiểm tra thư mục có tồn tại không
+        # Check whether the folder exists.
         if os.path.exists(thu_muc):
-            # Lấy tất cả file trong thư mục
+            # Get all files in the folder.
             file_trong_folder = os.listdir(thu_muc)
             for ten_file in file_trong_folder:
-                # Chỉ lấy đúng đuôi file mình cần
+                # Keep only the file extensions we need.
                 if ten_file.endswith('.pkl') or ten_file.endswith('.joblib') or ten_file.endswith('.json'):
-                    # Ghép tên thư mục với tên file (ví dụ: models/model.pkl)
+                    # Combine folder and file name, for example models/model.pkl.
                     duong_dan_day_du = os.path.join(thu_muc, ten_file)
                     ds_file.append(duong_dan_day_du)
     return ds_file
 
 def main():
     while True:
-        print("\nMENU KIỂM TRA FILE")
+        print("\nFILE INSPECTION MENU")
         
         danh_sach = lay_danh_sach_file()
         
         if len(danh_sach) == 0:
-            print("Không tìm thấy file!")
+            print("No files found!")
             break
 
-        # In danh sách ra màn hình
+        # Print the list to the screen.
         for i in range(len(danh_sach)):
             print(f"[{i + 1}] {danh_sach[i]}")
-        print("[0] Thoát")
+        print("[0] Exit")
 
-        chon = input("\nNhập số file muốn xem: ")
+        chon = input("\nEnter the file number to inspect: ")
 
         if chon == '0':
-            print("KẾT THÚC CHƯƠNG TRÌNH!")
+            print("PROGRAM ENDED!")
             break
         
         try:
@@ -143,21 +143,21 @@ def main():
             
             if so_thu_tu >= 0 and so_thu_tu < len(danh_sach):
                 file_duoc_chon = danh_sach[so_thu_tu]
-                
-                # Kiểm tra đuôi file để gọi hàm đúng
+
+                # Check the file extension to call the correct reader.
                 if file_duoc_chon.endswith('.json'):
                     xem_file_json(file_duoc_chon)
                 else:
                     xem_file_pkl_joblib(file_duoc_chon)
-                
-                input("\n(Ấn Enter để tiếp tục...)")
+
+                input("\n(Press Enter to continue...)")
             else:
-                print("Số nhập không đúng!")
+                print("Invalid number!")
         except:
-            print("Vui lòng nhập số!")
+            print("Please enter a number!")
 
 if __name__ == "__main__":
     main()
 
-    # Chạy lệnh sau trong terminal
+    # Run the following command in the terminal:
     # python check_results.py

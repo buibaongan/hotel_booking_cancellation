@@ -142,7 +142,7 @@ class EvaluationPlotter:
         search_path = os.path.join(os.path.abspath(self.model_dir), file_pattern)
         files = glob.glob(search_path)
         if not files:
-            print(f"*** KHÔNG TÌM THẤY FILE KẾT QUẢ NÀO TRONG: {self.model_dir}")
+            print(f"*** NO RESULT FILES FOUND IN: {self.model_dir}")
             return
 
         results = []
@@ -423,7 +423,7 @@ class ModelTrainer:
 
         summary = pd.DataFrame(summary_rows).sort_values("Best_CV_Score", ascending=False)
         self.repository.save_dataframe(summary, "model_comparison_summary.csv")
-        print("\n[INFO] Đã lưu bảng so sánh mô hình vào: models/model_comparison_summary.csv")
+        print("\n[INFO] Saved model comparison summary to: models/model_comparison_summary.csv")
         print(summary)
 
         self.model = best_model

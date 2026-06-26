@@ -1,32 +1,36 @@
-**CHỦ ĐỀ: DỰ ĐOÁN KHẢ NĂNG HỦY ĐẶT PHÒNG KHÁCH SẠN**
-*(Hotel Booking Cancellation Prediction)*
+# **FINAL PROJECT**
+**COURSE: PYTHON FOR DATA SCIENCE**
 
-## I. GIỚI THIỆU
-Dự án xây dựng mô hình Machine Learning nhằm dự đoán khách hàng có hủy đặt phòng hay không, hỗ trợ khách sạn:
-* Giảm rủi ro phòng trống đột xuất
-* Tối ưu doanh thu
-* Chủ động chính sách đặt phòng
+**Course code:** MTH10605
+
+**TOPIC: HOTEL BOOKING CANCELLATION PREDICTION**
+
+## I. Introduction
+This project builds a Machine Learning model to predict whether a customer will cancel a hotel booking. The goal is to help hotels:
+* Reduce the risk of unexpected vacant rooms
+* Optimize revenue
+* Make booking policies more proactive
 
 **Dataset**: `hotel_bookings.csv`
-* **Input**: Thông tin khách hàng, loại phòng, thời gian đặt, tiền cọc...
-* **Output**: `0` (Không hủy) hoặc `1` (Hủy).
+* **Input**: Customer information, room type, booking timing, deposit details, and related fields.
+* **Output**: `0` (Not canceled) or `1` (Canceled).
 
-## II. CÀI ĐẶT MÔI TRƯỜNG
-**1. Yêu cầu hệ thống**
-* Python 3.8 trở lên.
-* RAM: Khuyến nghị 8GB trở lên.
+## II. Environment Setup
+**1. System requirements**
+* Python 3.8 or later.
+* RAM: 8 GB or more is recommended.
 
-**2. Cài đặt thư viện**
-Chạy lệnh sau trong Terminal/Command Prompt để cài đặt các thư viện cần thiết:
+**2. Install dependencies**
+Run the following command in Terminal or Command Prompt:
 ```bash
 pip install -r requirements.txt
 ```
-***Lưu ý:*** Đảm bảo bạn đang đứng ở thư mục **MY_PROJECT** chứa file `requirements.txt`.
+***Note:*** Make sure you are in the **MY_PROJECT** directory that contains `requirements.txt`.
 
-## III. CẤU HÌNH (Config.ini)
-* Dự án sử dụng file `config.ini` có sẵn trong folder **MY_PROJECT** để quản lý mọi tham số.
-* ***Lưu ý***: Thay đổi đường dẫn `inputpath`, `trainpath`, `testpath` nếu bạn đặt dữ liệu ở vị trí khác.
-* **Ví dụ**
+## III. Configuration (`config.ini`)
+* The project uses `config.ini` in the **MY_PROJECT** folder to manage parameters.
+* ***Note:*** Change `inputpath`, `trainpath`, and `testpath` if your data is stored somewhere else.
+* **Example**
 ```ini
 [PREPROCESSING]
 inputpath = data/raw/hotel_bookings.csv
@@ -37,33 +41,34 @@ testpath = data/processed/test_processed.csv
 target = is_canceled
 ```
 
-## IV. QUY TRÌNH CHẠY DỰ ÁN
-Hãy thực hiện tuần tự theo các bước sau để đảm bảo chương trình chạy đúng:
+## IV. Project Workflow
+Run the steps below in order to make sure the program works correctly.
 
-**Bước 1: Khám phá dữ liệu (EDA)**
-1. Đứng ở thư mục gốc dự án.
-2. Chạy `python src/generate_EDA_report.py`.
-3. **Kết quả**: Mở file `reports/FULL_EDA_REPORT.html` để xem báo cáo EDA chi tiết.
+**Step 1: Exploratory Data Analysis (EDA)**
+1. Open a terminal at the project root.
+2. Run `python src/generate_EDA_report.py`.
+3. **Result**: Open `reports/FULL_EDA_REPORT.html` to view the detailed EDA report.
 
-**Bước 2: Tiền xử lý dữ liệu (Preprocessing)**
-Làm sạch dữ liệu, mã hóa biến phân loại và chia tập Train/Test.
-* Chạy:
+**Step 2: Data Preprocessing**
+Clean the data, encode categorical variables, and split the data into train/test sets.
+* Run:
 ```bash
 python main.py --preprocess-only
 ```
-* Dữ liệu sau khi xử lý và chia train/test được lưu vào:
+* The processed train/test files are saved to:
   * `MY_PROJECT/data/processed/train_processed.csv`
   * `MY_PROJECT/data/processed/test_processed.csv`
 
-**Bước 3: Huấn luyện & Dự đoán (Modeling)**
-Có thể chạy không cần nhập tương tác:
+**Step 3: Training and Prediction**
+You can run the pipeline without interactive input.
 
-**A. Chế độ Tự động (Khuyên dùng)**
-* Hệ thống chạy tất cả model (CatBoost, XGBoost, LightGBM, RandomForest) và chọn model tốt nhất theo CV score:
+**A. Automatic mode (recommended)**
+* The system trains all models (CatBoost, XGBoost, LightGBM, RandomForest) and selects the best model by CV score:
 ```bash
 python main.py --model Auto --no-prompt
 ```
-**B. Chạy từng thuật toán riêng lẻ**
+
+**B. Run one algorithm**
 ```bash
 python main.py --model CatBoost --no-prompt
 python main.py --model XGBoost --no-prompt
@@ -71,81 +76,80 @@ python main.py --model LightGBM --no-prompt
 python main.py --model RandomForest --no-prompt
 ```
 
-Nếu chạy `python main.py` không truyền `--model`, chương trình sẽ hỏi tên model trong terminal.
+If you run `python main.py` without `--model`, the program asks for the model name in the terminal.
 
-## V. HƯỚNG DẪN ĐỌC CÁC FILE KẾT QUẢ (.pkl, .joblib, .json)
+## V. Reading Result Files (`.pkl`, `.joblib`, `.json`)
 
-Các file `.pkl` (Pickle) và `.joblib` là dạng file nhị phân lưu trữ object của Python (Model, Preprocessor), do đó **không thể mở xem trực tiếp bằng Notepad** (sẽ bị lỗi font).
+`.pkl` (Pickle) and `.joblib` files are binary files that store Python objects such as models and preprocessors, so they **cannot be read directly in Notepad**.
 
-Để xem nội dung các file này một cách chi tiết, hãy thực hiện theo các bước sau:
+To inspect these files in detail, follow these steps:
 
-**Bước 1:**
-* Mở Terminal (phím tắt: `ctrl + ~`) tại thư mục dự án và chạy lệnh:
+**Step 1:**
+* Open a terminal at the project directory and run:
 ```bash
 python check_results.py
 ```
-**Bước 2:** 
-*  Nhập số thứ tự file muốn xem
+
+**Step 2:**
+* Enter the number of the file you want to inspect.
 ```bash
- --- CHƯƠNG TRÌNH KIỂM TRA FILE KẾT QUẢ ---
+ --- RESULT FILE INSPECTION PROGRAM ---
 [1] models\best_model.pkl
 [2] models\evaluation_CatBoost.json
 [3] models\evaluation_LightGBM.json
 [4] models\evaluation_RandomForest.json
 [5] models\evaluation_XGBoost.json
 [6] reports\preprocessor.joblib
-[0] Thoát
+[0] Exit
 
-*** Nhập số thứ tự file muốn xem: 
-
+*** Enter the file number to inspect:
 ```
 
-
-## VI. CẤU TRÚC THƯ MỤC DỰ ÁN
-* Sau khi chạy xong, thư mục dự án có cấu trúc như sau:
+## VI. Project Directory Structure
+After the pipeline finishes, the project structure is:
 ```bash
 MY_PROJECT/
 │
-├── main.py                     # Hàm chạy chính
-├── config.ini                  # File cấu hình chính
-├── README.md                   # File hướng dẫn
-├── requirements.txt            # Danh sách thư viện
-├── activity.log                # Nhật ký chạy (Log file)
-├── check_results.py            # Xem kết quả các file joblib, pkl, json
+├── main.py                     # Main runner
+├── config.ini                  # Main configuration file
+├── README.md                   # User guide
+├── requirements.txt            # Dependency list
+├── activity.log                # Runtime log file
+├── check_results.py            # Inspect joblib, pkl, and json result files
 │
-├── data/                       # Dữ liệu
+├── data/                       # Data files
 │   ├── raw
 │   │   └── hotel_bookings.csv
 │   └── processed
 │       ├── train_processed.csv
 │       └── test_processed.csv
 │
-├── models/                     # Chứa Model và Kết quả đánh giá 
-│   ├── best_model.pkl                  # File model tốt nhất khi chạy Auto
+├── models/                     # Trained models and evaluation outputs
+│   ├── best_model.pkl                  # Best model from Auto mode
 │   │
-│   ├── comparison_barplot.png          # Biểu đồ so sánh
+│   ├── comparison_barplot.png          # Comparison chart
 │   ├── comparison_confusion_matrices.png
 │   ├── comparison_roc_curve.png
 │   │
-│   ├── evaluation_CatBoost.json        # Kết quả đánh giá chi tiết (JSON)
+│   ├── evaluation_CatBoost.json        # Detailed evaluation results
 │   ├── evaluation_LightGBM.json
 │   ├── evaluation_RandomForest.json
 │   ├── evaluation_XGBoost.json
 │   │
-│   ├── feature_importance_CatBoost.csv # Mức độ quan trọng của biến (CSV)
+│   ├── feature_importance_CatBoost.csv # Feature importance table
 │   ├── feature_importance_LightGBM.csv
 │   ├── feature_importance_RandomForest.csv
 │   ├── feature_importance_XGBoost.csv
-│   └── model_comparison_summary.csv    # Bảng tổng hợp so sánh
+│   └── model_comparison_summary.csv    # Model comparison summary
 │
-├── reports/                    # Báo cáo 
-│   ├── images/                 # Thư mục chứa ảnh bổ trợ 
-│   ├── FULL_EDA_REPORT.html    # Báo cáo HTML
-│   ├── eda_activity.log        # Nhật ký chạy EDA
-│   └── preprocessor.joblib     # File xử lý dữ liệu
+├── reports/                    # Reports
+│   ├── images/                 # Supporting images
+│   ├── FULL_EDA_REPORT.html    # HTML report
+│   ├── eda_activity.log        # EDA runtime log
+│   └── preprocessor.joblib     # Saved preprocessing object
 │
-└── src/                        # Mã nguồn
-    ├── __init__.py             # File rỗng báo Python biết src là 1 package
+└── src/                        # Source code
+    ├── __init__.py             # Marks src as a Python package
     ├── generate_EDA_report.py
     ├── preprocessing.py
     ├── model.py
@@ -153,29 +157,29 @@ MY_PROJECT/
     └── pipeline.py
 ```
 
-## SỰ CỐ THƯỜNG GẶP
-|        Vấn đề       |          Nguyên nhân         |                           Cách khắc phục                          |
-|:-------------------:|:----------------------------:|:-----------------------------------------------------------------:|
-| ModuleNotFoundError | Chưa cài thư viện            | Chạy lại lệnh: pip install -r requirements.txt                    |
-| Lỗi MemoryError     | Dữ liệu quá lớn gây tràn RAM | Giảm n_jobs xuống số nhỏ (ví dụ 2). Giảm cv xuống 3 trong config. |
-| File not found      | Sai đường dẫn trong config   | Kiểm tra lại mục [DATA] trong config.ini, đảm bảo tên file đúng.  |
-| UnicodeDecodeError  | File config bị lỗi font chữ  | Mở file config.ini, chọn Save As -> Encoding: UTF-8.              |
+## Common Issues
+| Issue | Cause | Fix |
+|:---:|:---:|:---:|
+| ModuleNotFoundError | Dependencies are not installed | Run `pip install -r requirements.txt` again |
+| MemoryError | The dataset is too large for available RAM | Reduce `n_jobs` to a smaller number, for example 2. Reduce `cv` to 3 in `config.ini`. |
+| File not found | The path in `config.ini` is wrong | Check the `[DATA]` section in `config.ini` and make sure the file names are correct. |
+| UnicodeDecodeError | The configuration file has an encoding issue | Open `config.ini`, choose Save As, and save with UTF-8 encoding. |
 
-## VII. FASTAPI PREDICTION API
+## VII. FastAPI Prediction API
 
-Dự án có API dự đoán trong `src/api.py`.
+The project includes a prediction API in `src/api.py`.
 
-**Cài thư viện**
+**Install dependencies**
 ```bash
 pip install -r requirements.txt
 ```
 
-**Chạy API**
+**Run the API**
 ```bash
 uvicorn src.api:app --reload --host 0.0.0.0 --port 8000
 ```
 
-Sau đó mở:
+Then open:
 ```text
 http://localhost:8000/docs
 ```
@@ -185,9 +189,9 @@ http://localhost:8000/docs
 curl http://localhost:8000/health
 ```
 
-**Dự đoán với dữ liệu đã xử lý**
+**Prediction with processed data**
 
-Nếu chỉ có `models/best_model.pkl` mà chưa có `reports/preprocessor.joblib`, hãy gửi đầy đủ các feature đã xử lý và thêm `processed=true`. Xem danh sách feature bằng:
+If you only have `models/best_model.pkl` and do not have `reports/preprocessor.joblib`, send all processed features and add `processed=true`. View the feature list with:
 
 ```bash
 curl http://localhost:8000/metadata
@@ -220,17 +224,17 @@ curl -X POST "http://localhost:8000/predict?processed=true" \
   }'
 ```
 
-**Dự đoán với dữ liệu booking thô**
+**Prediction with raw booking data**
 
-Muốn gửi dữ liệu thô như `hotel`, `meal`, `country`, `adults`, `children`..., cần có `reports/preprocessor.joblib`. Model và preprocessor nên được tạo từ cùng một lần chạy pipeline để tránh lệch schema feature.
+To send raw data such as `hotel`, `meal`, `country`, `adults`, and `children`, you need `reports/preprocessor.joblib`. The model and preprocessor should be created from the same pipeline run to avoid feature schema mismatches.
 
 ```bash
 python main.py --model Auto --no-prompt
 ```
 
-Nếu model hiện tại đã được train đúng với preprocessor hiện tại, có thể chỉ chạy `python main.py --preprocess-only`.
+If the current model was trained with the current preprocessor, you can run only `python main.py --preprocess-only`.
 
-Ví dụ request:
+Example request:
 ```bash
 curl -X POST "http://localhost:8000/predict" \
   -H "Content-Type: application/json" \
@@ -266,7 +270,7 @@ curl -X POST "http://localhost:8000/predict" \
   }'
 ```
 
-API trả về:
+API response:
 ```json
 {
   "prediction": 1,

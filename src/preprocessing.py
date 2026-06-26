@@ -298,11 +298,11 @@ class DataPreprocessor:
             output[self.target_col] = y.reset_index(drop=True)
         path = os.path.join(output_dir, filename)
         output.to_csv(path, index=False)
-        print(f"Đã lưu dữ liệu vào: {path} (Shape: {output.shape})")
+        print(f"Saved data to: {path} (Shape: {output.shape})")
 
     def save_preprocessor(self, path: str) -> None:
         directory = os.path.dirname(path)
         if directory:
             os.makedirs(directory, exist_ok=True)
         joblib.dump(self, path)
-        print(f"Đã lưu Preprocessor tại {path}")
+        print(f"Saved preprocessor to {path}")
